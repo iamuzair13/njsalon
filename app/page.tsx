@@ -1,65 +1,164 @@
+"use client";
+
+import Hero from "@/components/Hero";
+import SectionHeading from "@/components/SectionHeading";
+import ServiceCard from "@/components/ServiceCard";
+import TestimonialCard from "@/components/TestimonialCard";
+import CTASection from "@/components/CTASection";
+import VideoIntroSection from "@/components/VideoIntroSection";
+import BeforeAfterSection from "@/components/BeforeAfterSection";
+import FAQSection from "@/components/FAQSection";
+import { homeServicePreview } from "@/data/services";
+import { Star, ArrowRight, MapPin } from "lucide-react";
 import Image from "next/image";
+import Link from "next/link";
+import { motion } from "framer-motion";
 
 export default function Home() {
   return (
-    <div className="flex flex-col flex-1 items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex flex-1 w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-          <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
-            To get started, edit the page.tsx file.
-          </h1>
-          <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
+    <>
+      <Hero />
+
+      {/* Trust strip */}
+      <section className="bg-brand-cream py-8">
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, amount: 0.2 }}
+          transition={{ duration: 0.5, ease: "easeOut" }}
+          className="mx-auto flex max-w-7xl flex-col items-center justify-center gap-3 px-4 text-center sm:flex-row sm:gap-6 sm:px-6 lg:px-8"
+        >
+          <div className="flex items-center gap-2">
+            <div className="flex gap-1">
+              {Array.from({ length: 5 }).map((_, i) => (
+                <Star
+                  key={i}
+                  className="h-5 w-5 fill-brand-primary text-brand-primary"
+                />
+              ))}
+            </div>
+            <span className="text-base font-600 text-brand-charcoal">
+              4.9 rated
+            </span>
+          </div>
+          <span className="hidden h-5 w-px bg-brand-border sm:block" />
+          <span className="text-base text-brand-charcoal-muted">
+            30+ happy clients on Google
+          </span>
+          <span className="hidden h-5 w-px bg-brand-border sm:block" />
+          <span className="flex items-center gap-1.5 text-base text-brand-charcoal-muted">
+            <MapPin className="h-4 w-4 text-brand-primary" />
+            Johar Town, Lahore
+          </span>
+        </motion.div>
+      </section>
+
+      {/* Services preview */}
+      <section className="bg-white py-16 sm:py-24">
+        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+          <SectionHeading
+            eyebrow=""
+            title="What We Offer"
+            subtitle="From everyday haircare to full bridal makeovers, our skilled team offers a full range of beauty services."
+          />
+          <div className="mt-12 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4">
+            {homeServicePreview.map((service, index) => (
+              <motion.div
+                key={service.id}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, amount: 0.2 }}
+                transition={{
+                  duration: 0.5,
+                  ease: "easeOut",
+                  delay: index * 0.1,
+                }}
+              >
+                <ServiceCard
+                  icon={service.icon}
+                  title={service.title}
+                  description={service.description}
+                />
+              </motion.div>
+            ))}
+          </div>
+          <div className="mt-10 text-center">
+            <Link
+              href="/services"
+              className="inline-flex items-center gap-2 text-base font-600 text-brand-primary transition-colors hover:text-brand-primary-dark"
             >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Learning
-            </a>{" "}
-            center.
-          </p>
+              View All Services
+              <ArrowRight className="h-4 w-4" />
+            </Link>
+          </div>
         </div>
-        <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
-          <a
-            className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc] md:w-[158px]"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
+      </section>
+
+      {/* About teaser */}
+      <section className="bg-brand-blush py-16 sm:py-24">
+        <div className="mx-auto grid max-w-7xl items-center gap-12 px-4 sm:px-6 lg:grid-cols-2 lg:px-8">
+          <motion.div
+            initial={{ opacity: 0, x: -20 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true, amount: 0.2 }}
+            transition={{ duration: 0.5, ease: "easeOut" }}
+            className="relative"
           >
+            {/* TODO: replace with real NJ Beauty Bliss photo */}
             <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={16}
+              src="https://images.unsplash.com/photo-1633681926022-84c23e8cb2d6?w=800&h=700&fit=crop"
+              alt="Salon stylist working with a client"
+              width={800}
+              height={700}
+              className="rounded-xl shadow-lg"
             />
-            Deploy Now
-          </a>
-          <a
-            className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] dark:border-white/[.145] dark:hover:bg-[#1a1a1a] md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
+          </motion.div>
+          <motion.div
+            initial={{ opacity: 0, x: 20 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true, amount: 0.2 }}
+            transition={{ duration: 0.5, ease: "easeOut" }}
           >
-            Documentation
-          </a>
+            <SectionHeading
+              eyebrow="About Us"
+              title="A Salon That Cares"
+              center={false}
+            />
+            <p className="mt-4 text-lg text-brand-charcoal-muted">
+              NJ Beauty Bliss is a trusted beauty salon in the heart of Johar
+              Town, Lahore, known for its clean, relaxing atmosphere and skilled
+              team of stylists and beauty specialists.
+            </p>
+            <p className="mt-4 text-base text-brand-charcoal-muted">
+              From everyday haircare to full bridal makeovers, every client is
+              treated with personal attention and care.
+            </p>
+            <Link
+              href="/about"
+              className="mt-6 inline-flex items-center gap-2 text-base font-600 text-brand-primary transition-colors hover:text-brand-primary-dark"
+            >
+              Learn More
+              <ArrowRight className="h-4 w-4" />
+            </Link>
+          </motion.div>
         </div>
-      </main>
-    </div>
+      </section>
+
+      {/* Video intro */}
+      <VideoIntroSection />
+
+      {/* Before & After results */}
+      <BeforeAfterSection />
+
+      {/* Testimonials */}
+      <section className="bg-brand-cream py-16 sm:py-24">
+        <TestimonialCard />
+      </section>
+
+      <FAQSection />
+
+      {/* CTA banner */}
+      <CTASection />
+    </>
   );
 }
