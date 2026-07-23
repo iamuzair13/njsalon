@@ -53,7 +53,7 @@ export default function VideoIntroSection() {
               className="group relative block w-full overflow-hidden rounded-2xl shadow-lg focus:outline-none focus:ring-4 focus:ring-brand-primary/30"
             >
               <video
-                autoPlay
+                
                 muted
                 loop
                 playsInline

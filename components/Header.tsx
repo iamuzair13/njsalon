@@ -36,7 +36,7 @@ export default function Header() {
         initial={{ opacity: 0, y: -16 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.45, ease: "easeOut" }}
-        className={`mx-auto max-w-7xl rounded-2xl border border-brand-border/70 transition-[background-color,box-shadow] duration-300 ${
+        className={`mx-auto max-w-7xl rounded-[50px] border border-brand-border/70 transition-[background-color,box-shadow] duration-300 ${
           scrolled
             ? "bg-white/95 shadow-md backdrop-blur-sm"
             : "bg-brand-cream/95 shadow-sm backdrop-blur-sm"
@@ -66,10 +66,10 @@ export default function Header() {
               <li key={link.href}>
                 <Link
                   href={link.href}
-                  className={`text-md font-500 transition-colors hover:text-brand-primary ${
+                  className={`relative text-md font-500 transition-colors hover:text-brand-primary after:absolute after:bottom-0 after:left-0 after:h-[2px] after:bg-brand-primary after:transition-all after:duration-300 after:ease-out ${
                     pathname === link.href
-                      ? "text-brand-primary"
-                      : "text-brand-charcoal"
+                      ? "text-brand-primary after:w-full"
+                      : "text-brand-charcoal after:w-0 hover:after:w-full"
                   }`}
                 >
                   {link.label}

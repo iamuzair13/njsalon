@@ -39,7 +39,7 @@ export default function Hero({
     <section className="relative isolate overflow-hidden bg-brand-blush pb-16 pt-28 sm:pb-20 sm:pt-32">
       <div className="absolute inset-y-0 right-0 hidden w-[100%] lg:block">
         <Image
-          src="/hero.png"
+          src="/hero1.png"
           alt="Client receiving a skincare treatment"
           fill
           priority
@@ -65,23 +65,17 @@ export default function Hero({
             <motion.h1
               variants={{ hidden: { opacity: 0, y: 20 }, visible: { opacity: 1, y: 0 } }}
               transition={{ duration: 0.5, ease: "easeOut" }}
-              className="mt-3 font-heading text-[80px] font-700 leading-[1.04] tracking-tight text-brand-charcoal sm:text-5xl lg:text-6xl"
+              className="mt-3 font-body text-4xl font-900 leading-[1.2] tracking-[-0.08em] text-brand-charcoal sm:text-5xl lg:text-[70.36px]"
             >
-              Where <em className="font-500 italic">Beauty,</em>
+              Where <em className="font-heading font-900 italic tracking-[-0.06em]">Beauty,</em>
               <br />
               Meets Elegance.
             </motion.h1>
+           
             <motion.p
               variants={{ hidden: { opacity: 0, y: 20 }, visible: { opacity: 1, y: 0 } }}
               transition={{ duration: 0.5, ease: "easeOut" }}
-              className="mt-5 text-base font-500 text-brand-charcoal sm:text-lg"
-            >
-              Expert beauty care at your fingertips.
-            </motion.p>
-            <motion.p
-              variants={{ hidden: { opacity: 0, y: 20 }, visible: { opacity: 1, y: 0 } }}
-              transition={{ duration: 0.5, ease: "easeOut" }}
-              className="mt-4 max-w-sm text-sm leading-relaxed text-brand-charcoal-muted mx-auto lg:mx-0"
+              className="mt-4 max-w-lg text-[18px] leading-relaxed text-brand-charcoal-muted mx-auto lg:mx-0"
             >
               Personalised beauty consultations, premium treatments, and a
               relaxing salon experience designed around you.
@@ -117,7 +111,7 @@ export default function Hero({
             className="relative mt-2 min-h-[360px] overflow-hidden rounded-2xl shadow-lg lg:hidden"
           >
             <Image
-              src="/hero.png"
+              src="/hero1.png"
               alt="Client receiving a skincare treatment"
               fill
               priority

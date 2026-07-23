@@ -17,11 +17,11 @@ export type ServiceCategory = {
 export const serviceCategories: ServiceCategory[] = [
   {
     id: "hair",
-    title: "Hair",
+    title: "Hair Dressing",
     icon: Scissors,
     services: [
       {
-        name: "Haircut & Styling",
+        name: "Hair Cut",
         description: "Precision cuts and blowouts tailored to your face shape and lifestyle.",
         startingPrice: "Rs. 1,500",
       },
@@ -39,7 +39,7 @@ export const serviceCategories: ServiceCategory[] = [
   },
   {
     id: "skin",
-    title: "Skin & Facials",
+    title: "Skin Care",
     icon: Sparkles,
     services: [
       {
@@ -83,7 +83,7 @@ export const serviceCategories: ServiceCategory[] = [
   },
   {
     id: "bridal",
-    title: "Bridal & Events",
+    title: "Special Events",
     icon: Heart,
     services: [
       {
