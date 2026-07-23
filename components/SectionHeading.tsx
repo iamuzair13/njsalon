@@ -17,11 +17,11 @@ export default function SectionHeading({
 }: SectionHeadingProps) {
   return (
     <motion.div
-      initial={{ opacity: 0, y: 20 }}
-      whileInView={{ opacity: 1, y: 0 }}
+      initial={{ opacity: 0, y: 24, filter: "blur(12px)" }}
+      whileInView={{ opacity: 1, y: 0, filter: "blur(0px)" }}
       viewport={{ once: true, amount: 0.2 }}
-      transition={{ duration: 0.5, ease: "easeOut" }}
-      className={center ? "text-center" : "text-left"}
+      transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
+      className={center ? "text-center" : "text-center lg:text-left"}
     >
       {eyebrow && (
         <span className="text-sm font-600 uppercase tracking-wider text-brand-primary">
@@ -34,7 +34,7 @@ export default function SectionHeading({
       {subtitle && (
         <p
           className={`mt-4 text-lg text-brand-charcoal-muted ${
-            center ? "mx-auto max-w-2xl" : "max-w-2xl"
+            center ? "mx-auto max-w-2xl" : "mx-auto max-w-2xl lg:mx-0"
           }`}
         >
           {subtitle}

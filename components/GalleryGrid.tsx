@@ -61,10 +61,10 @@ export default function GalleryGrid({ images, categories }: GalleryGridProps) {
         {filteredImages.map((img, index) => (
           <motion.div
             key={`${img.src}-${index}`}
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
+            initial={{ opacity: 0, y: 24, filter: "blur(12px)" }}
+            whileInView={{ opacity: 1, y: 0, filter: "blur(0px)" }}
             viewport={{ once: true, amount: 0.1 }}
-            transition={{ duration: 0.4, ease: "easeOut" }}
+            transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
             whileHover={{ scale: 1.03 }}
             className="relative cursor-pointer overflow-hidden rounded-xl shadow-sm"
             onClick={() => setLightboxIndex(index)}

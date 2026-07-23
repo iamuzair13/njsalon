@@ -36,31 +36,31 @@ export default function FAQSection() {
   const [openIndex, setOpenIndex] = useState<number | null>(0);
 
   return (
-    <section className="bg-brand-cream py-16 sm:py-24">
+    <section className="bg-brand-primary py-16 sm:py-24">
       <div className="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8">
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
+          initial={{ opacity: 0, y: 24, filter: "blur(12px)" }}
+          whileInView={{ opacity: 1, y: 0, filter: "blur(0px)" }}
           viewport={{ once: true, amount: 0.2 }}
-          transition={{ duration: 0.5, ease: "easeOut" }}
+          transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
           className="text-center"
         >
-          <span className="text-sm font-600 uppercase tracking-wider text-brand-primary">
+          <span className="text-sm font-600 uppercase tracking-wider text-white">
             Need to Know
           </span>
-          <h2 className="mt-2 font-heading text-3xl font-700 text-brand-charcoal sm:text-4xl">
+          <h2 className="mt-2 font-heading text-3xl font-700 text-white sm:text-4xl">
             Frequently Asked Questions
           </h2>
-          <p className="mt-4 text-base text-brand-charcoal-muted">
+          <p className="mt-4 text-base text-white">
             Everything you need to know before your visit to NJ Beauty Bliss.
           </p>
         </motion.div>
 
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
+          initial={{ opacity: 0, y: 24, filter: "blur(12px)" }}
+          whileInView={{ opacity: 1, y: 0, filter: "blur(0px)" }}
           viewport={{ once: true, amount: 0.2 }}
-          transition={{ duration: 0.5, ease: "easeOut", delay: 0.1 }}
+          transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1], delay: 0.1 }}
           className="mt-10 space-y-3"
         >
           {faqs.map((faq, index) => {
@@ -107,7 +107,7 @@ export default function FAQSection() {
           })}
         </motion.div>
 
-        <p className="mt-8 text-center text-sm text-brand-charcoal-muted">
+        <p className="mt-8 text-center text-sm text-white">
           Still have questions? Contact us on WhatsApp and our team will be happy
           to help.
         </p>

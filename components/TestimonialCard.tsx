@@ -25,7 +25,7 @@ function StarRating({ rating }: { rating: number }) {
 
 function TestimonialFigure({ testimonial }: { testimonial: Testimonial }) {
   return (
-    <figure className="relative w-[300px] shrink-0 rounded-2xl border border-brand-border bg-white py-6 pl-5 pr-5 shadow-sm transition-shadow duration-200 hover:shadow-md sm:w-[340px] sm:pl-16">
+    <figure className="relative w-[300px] shrink-0 snap-center rounded-2xl border border-brand-border bg-white py-6 pl-5 pr-5 shadow-sm transition-shadow duration-200 hover:shadow-md sm:w-[340px] sm:snap-none sm:pl-16">
       {/* TODO: replace with real NJ Beauty Bliss client photo */}
       <Image
         src={testimonial.avatar}
@@ -54,6 +54,7 @@ export default function TestimonialCard() {
   const scrollRef = useRef<HTMLDivElement>(null);
   const [canScrollPrev, setCanScrollPrev] = useState(false);
   const [canScrollNext, setCanScrollNext] = useState(true);
+  const [activeDirection, setActiveDirection] = useState<"prev" | "next">("next");
 
   const updateScrollState = () => {
     const el = scrollRef.current;
@@ -65,23 +66,24 @@ export default function TestimonialCard() {
   const scroll = (direction: "prev" | "next") => {
     const el = scrollRef.current;
     if (!el) return;
-    const cardWidth = 340 + 24;
+    const cardWidth = 300 + 24;
     el.scrollBy({
       left: direction === "prev" ? -cardWidth : cardWidth,
       behavior: "smooth",
     });
+    setActiveDirection(direction);
   };
 
   return (
     <motion.div
-      initial={{ opacity: 0, y: 20 }}
-      whileInView={{ opacity: 1, y: 0 }}
+      initial={{ opacity: 0, y: 24, filter: "blur(12px)" }}
+      whileInView={{ opacity: 1, y: 0, filter: "blur(0px)" }}
       viewport={{ once: true, amount: 0.2 }}
-      transition={{ duration: 0.5, ease: "easeOut" }}
+      transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
     >
       <div className="mx-auto max-w-6xl">
         {/* Header row */}
-        <div className="mb-10 grid gap-6 md:mb-14 md:grid-cols-3 md:items-end">
+        <div className="mb-10 grid gap-6 text-center md:mb-14 md:grid-cols-3 md:items-end md:text-left">
           <div className="col-span-2">
             <span className="text-sm font-600 uppercase tracking-wider text-brand-primary">
               Client Love
@@ -89,31 +91,39 @@ export default function TestimonialCard() {
             <h2 className="mt-2 font-heading text-3xl font-700 text-brand-charcoal sm:text-4xl">
               What Our Happy Clients Say
             </h2>
-            <p className="mt-4 max-w-xl text-base leading-relaxed text-brand-charcoal-muted">
+            <p className="mt-4 max-w-xl text-base leading-relaxed text-brand-charcoal-muted mx-auto md:mx-0">
               See what our happy clients have to say. They&apos;ve shared how
               our services helped them look and feel their best.
             </p>
           </div>
 
           {/* Prev / Next buttons */}
-          <div className="flex items-end justify-start gap-3 md:justify-end">
+          <div className="flex items-end justify-center gap-3 md:justify-end">
             <button
               type="button"
               aria-label="Previous slide"
               onClick={() => scroll("prev")}
               disabled={!canScrollPrev}
-              className="flex h-10 w-10 items-center justify-center rounded-full border border-brand-border bg-white transition-all duration-200 hover:bg-brand-blush focus:outline-none focus-visible:ring-2 focus-visible:ring-brand-primary disabled:cursor-default disabled:opacity-40"
+              className={`flex h-10 w-10 items-center justify-center rounded-full border transition-all duration-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-brand-primary disabled:cursor-default disabled:opacity-40 ${
+                activeDirection === "prev"
+                  ? "border-brand-primary bg-brand-primary hover:bg-brand-primary-dark"
+                  : "border-brand-border bg-white hover:bg-brand-blush"
+              }`}
             >
-              <ChevronLeft className="h-4 w-4 text-brand-charcoal" />
+              <ChevronLeft className={`h-4 w-4 ${activeDirection === "prev" ? "text-white" : "text-brand-charcoal"}`} />
             </button>
             <button
               type="button"
               aria-label="Next slide"
               onClick={() => scroll("next")}
               disabled={!canScrollNext}
-              className="flex h-10 w-10 items-center justify-center rounded-full border border-brand-primary bg-brand-primary transition-all duration-200 hover:bg-brand-primary-dark focus:outline-none focus-visible:ring-2 focus-visible:ring-brand-primary disabled:cursor-default disabled:opacity-40"
+              className={`flex h-10 w-10 items-center justify-center rounded-full border transition-all duration-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-brand-primary disabled:cursor-default disabled:opacity-40 ${
+                activeDirection === "next"
+                  ? "border-brand-primary bg-brand-primary hover:bg-brand-primary-dark"
+                  : "border-brand-border bg-white hover:bg-brand-blush"
+              }`}
             >
-              <ChevronRight className="h-4 w-4 text-white" />
+              <ChevronRight className={`h-4 w-4 ${activeDirection === "next" ? "text-white" : "text-brand-charcoal"}`} />
             </button>
           </div>
         </div>

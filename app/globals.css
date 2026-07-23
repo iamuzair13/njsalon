@@ -9,6 +9,8 @@
   --color-brand-charcoal: #262223;
   --color-brand-charcoal-muted: #6B6062;
   --color-brand-border: #F0DCE1;
+  --color-whatsapp: #25D366;
+  --color-whatsapp-dark: #1ebe5d;
 
   --font-heading: var(--font-playfair);
   --font-body: var(--font-inter);
@@ -17,6 +19,10 @@
 :root {
   --background: #FFF9F7;
   --foreground: #262223;
+}
+
+html {
+  scroll-behavior: smooth;
 }
 
 body {

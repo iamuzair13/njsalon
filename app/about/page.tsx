@@ -28,16 +28,15 @@ const team = [
 export default function AboutPage() {
   return (
     <>
-      <Hero variant="inner" title="About Us" breadcrumb="About" />
 
       {/* Salon story */}
       <section className="bg-white py-16 sm:py-24">
-        <div className="mx-auto grid max-w-7xl items-center gap-12 px-4 sm:px-6 lg:grid-cols-2 lg:px-8">
+        <div className="mx-auto max-sm:pt-6 flex max-w-7xl flex-col-reverse items-center gap-12 px-4 sm:px-6 lg:grid lg:grid-cols-2 lg:px-8">
           <motion.div
-            initial={{ opacity: 0, x: -20 }}
-            whileInView={{ opacity: 1, x: 0 }}
+            initial={{ opacity: 0, x: -24, filter: "blur(12px)" }}
+            whileInView={{ opacity: 1, x: 0, filter: "blur(0px)" }}
             viewport={{ once: true, amount: 0.2 }}
-            transition={{ duration: 0.5, ease: "easeOut" }}
+            transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
             className="relative"
           >
             {/* TODO: replace with real NJ Beauty Bliss photo */}
@@ -50,29 +49,22 @@ export default function AboutPage() {
             />
           </motion.div>
           <motion.div
-            initial={{ opacity: 0, x: 20 }}
-            whileInView={{ opacity: 1, x: 0 }}
+            initial={{ opacity: 0, x: 24, filter: "blur(12px)" }}
+            whileInView={{ opacity: 1, x: 0, filter: "blur(0px)" }}
             viewport={{ once: true, amount: 0.2 }}
-            transition={{ duration: 0.5, ease: "easeOut" }}
+            transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
           >
             <SectionHeading
               eyebrow="Our Story"
               title="Beauty with a Personal Touch"
               center={false}
             />
-            <p className="mt-4 text-lg text-brand-charcoal-muted">
+            <p className="mt-4 text-lg text-brand-charcoal-muted text-center">
               NJ Beauty Bliss is a trusted beauty salon in the heart of Johar
               Town, Lahore, known for its clean, relaxing atmosphere and skilled
               team of stylists and beauty specialists. From everyday haircare to
               full bridal makeovers, every client is treated with personal
               attention and care.
-            </p>
-            <p className="mt-4 text-base text-brand-charcoal-muted">
-              We believe beauty is more than just a service — it&apos;s an
-              experience. That&apos;s why we&apos;ve created a calm, welcoming
-              space where you can unwind and leave feeling confident and
-              radiant. Our team stays up-to-date with the latest trends and
-              techniques to ensure you always get the best results.
             </p>
           </motion.div>
         </div>
@@ -83,10 +75,10 @@ export default function AboutPage() {
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 gap-8 md:grid-cols-2">
             <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
+              initial={{ opacity: 0, y: 24, filter: "blur(12px)" }}
+              whileInView={{ opacity: 1, y: 0, filter: "blur(0px)" }}
               viewport={{ once: true, amount: 0.2 }}
-              transition={{ duration: 0.5, ease: "easeOut" }}
+              transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
               className="rounded-xl border border-brand-border bg-white p-8 shadow-sm"
             >
               <div className="flex h-12 w-12 items-center justify-center rounded-full bg-brand-primary-light">
@@ -102,10 +94,10 @@ export default function AboutPage() {
               </p>
             </motion.div>
             <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
+              initial={{ opacity: 0, y: 24, filter: "blur(12px)" }}
+              whileInView={{ opacity: 1, y: 0, filter: "blur(0px)" }}
               viewport={{ once: true, amount: 0.2 }}
-              transition={{ duration: 0.5, ease: "easeOut", delay: 0.1 }}
+              transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1], delay: 0.1 }}
               className="rounded-xl border border-brand-border bg-white p-8 shadow-sm"
             >
               <div className="flex h-12 w-12 items-center justify-center rounded-full bg-brand-primary-light">
@@ -136,12 +128,12 @@ export default function AboutPage() {
             {team.map((member, index) => (
               <motion.div
                 key={index}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
+                initial={{ opacity: 0, y: 24, filter: "blur(12px)" }}
+                whileInView={{ opacity: 1, y: 0, filter: "blur(0px)" }}
                 viewport={{ once: true, amount: 0.2 }}
                 transition={{
-                  duration: 0.5,
-                  ease: "easeOut",
+                  duration: 0.7,
+                  ease: [0.22, 1, 0.36, 1],
                   delay: index * 0.1,
                 }}
                 whileHover={{ scale: 1.03 }}

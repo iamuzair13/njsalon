@@ -12,11 +12,11 @@ export default function WhatsAppButton({
   className = "",
 }: WhatsAppButtonProps) {
   const baseClasses =
-    "inline-flex items-center gap-2 rounded-full px-7 py-3.5 text-base font-600 transition-all duration-200 hover:scale-[1.02] focus:outline-none focus:ring-2 focus:ring-brand-primary focus:ring-offset-2";
+    "inline-flex items-center gap-2 rounded-full px-7 py-3.5 text-base font-600 transition-all duration-200 hover:scale-[1.02] focus:outline-none focus:ring-2 focus:ring-whatsapp focus:ring-offset-2";
   const variantClasses =
     variant === "primary"
-      ? "bg-brand-primary text-white hover:bg-brand-primary-dark"
-      : "border-2 border-brand-primary text-brand-primary hover:bg-brand-primary hover:text-white";
+      ? "bg-whatsapp text-white hover:bg-whatsapp-dark"
+      : "border-2 border-whatsapp text-whatsapp hover:bg-whatsapp hover:text-white";
 
   return (
     <a

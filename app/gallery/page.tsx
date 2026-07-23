@@ -95,9 +95,8 @@ const categories = ["All", "Hair", "Skin", "Nails", "Bridal"];
 export default function GalleryPage() {
   return (
     <>
-      <Hero variant="inner" title="Gallery" breadcrumb="Gallery" />
 
-      <section className="bg-white py-16 sm:py-24">
+      <section className="bg-white py-26 sm:py-24">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <SectionHeading
             eyebrow="Our Work"

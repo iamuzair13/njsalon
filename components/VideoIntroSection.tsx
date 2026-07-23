@@ -1,7 +1,6 @@
 "use client";
 
 import { useState, useRef } from "react";
-import Image from "next/image";
 import { motion } from "framer-motion";
 import { Play } from "lucide-react";
 import VideoModal from "@/components/VideoModal";
@@ -24,10 +23,10 @@ export default function VideoIntroSection() {
     <section className="bg-brand-cream py-16 sm:py-24">
       <div className="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
+          initial={{ opacity: 0, y: 24, filter: "blur(12px)" }}
+          whileInView={{ opacity: 1, y: 0, filter: "blur(0px)" }}
           viewport={{ once: true, amount: 0.2 }}
-          transition={{ duration: 0.5, ease: "easeOut" }}
+          transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
         >
           {/* Heading */}
           <div className="text-center">
@@ -53,15 +52,15 @@ export default function VideoIntroSection() {
               aria-label="Play video introduction"
               className="group relative block w-full overflow-hidden rounded-2xl shadow-lg focus:outline-none focus:ring-4 focus:ring-brand-primary/30"
             >
-              {/* TODO: replace with a real high-quality still photo from inside NJ Beauty Bliss salon */}
-              <Image
-                src="https://images.unsplash.com/photo-1560066984-138dadb4c035?w=1200&h=675&fit=crop"
-                alt="NJ Beauty Bliss salon interior"
-                width={1200}
-                height={675}
-                priority
+              <video
+                autoPlay
+                muted
+                loop
+                playsInline
                 className="aspect-video w-full object-cover"
-              />
+              >
+                <source src="/vidssave.com INTRO_ make up & hair _ A cinematic B-roll 1080P.mp4" type="video/mp4" />
+              </video>
 
               {/* Dark overlay for contrast */}
               <div className="absolute inset-0 bg-black/20 transition-opacity duration-200 group-hover:bg-black/30" />
@@ -75,7 +74,7 @@ export default function VideoIntroSection() {
                   ease: "linear",
                   repeat: Infinity,
                 }}
-                className="absolute left-4 top-4 flex h-24 w-24 items-center justify-center rounded-full bg-brand-charcoal/60 backdrop-blur-sm sm:h-28 sm:w-28"
+                className="absolute left-4 top-4 flex h-15 w-15 items-center justify-center rounded-full bg-brand-charcoal/60 backdrop-blur-sm sm:h-28 sm:w-28"
               >
                 <svg
                   viewBox="0 0 100 100"
@@ -102,7 +101,7 @@ export default function VideoIntroSection() {
                   }}
                   className="absolute flex items-center justify-center"
                 >
-                  <Play className="h-5 w-5 fill-white text-white sm:h-6 sm:w-6" style={{ marginLeft: "2px" }} />
+                  <Play className="h-4 w-4 fill-white text-white sm:h-6 sm:w-6" style={{ marginLeft: "2px" }} />
                 </motion.div>
               </motion.div>
 
@@ -123,8 +122,7 @@ export default function VideoIntroSection() {
       <VideoModal
         isOpen={modalOpen}
         onClose={handleClose}
-        videoSrc="https://cdn.coverr.co/videos/coverr-a-woman-getting-a-haircut-2633/1080p.mp4"
-        posterSrc="https://images.unsplash.com/photo-1560066984-138dadb4c035?w=1200&h=675&fit=crop"
+        videoSrc="/vidssave.com INTRO_ make up & hair _ A cinematic B-roll 1080P.mp4"
       />
     </section>
   );

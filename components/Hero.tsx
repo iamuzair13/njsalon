@@ -9,7 +9,6 @@ type HeroProps = {
   variant?: "home" | "inner";
   title?: string;
   subtitle?: string;
-  breadcrumb?: string;
   imageSrc?: string;
 };
 
@@ -17,27 +16,12 @@ export default function Hero({
   variant = "home",
   title,
   subtitle,
-  breadcrumb,
   imageSrc,
 }: HeroProps) {
   if (variant === "inner") {
     return (
       <section className="relative flex items-center justify-center bg-brand-blush pt-32 pb-16 sm:pt-36 sm:pb-20">
         <div className="mx-auto max-w-7xl px-4 text-center sm:px-6 lg:px-8">
-          <motion.nav
-            initial={{ opacity: 0, y: 10 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.4, ease: "easeOut" }}
-            className="mb-4"
-          >
-            <span className="text-sm text-brand-charcoal-muted">
-              <Link href="/" className="hover:text-brand-primary transition-colors">
-                Home
-              </Link>
-              {" / "}
-              <span className="text-brand-primary">{breadcrumb}</span>
-            </span>
-          </motion.nav>
           <motion.h1
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
@@ -53,16 +37,17 @@ export default function Hero({
 
   return (
     <section className="relative isolate overflow-hidden bg-brand-blush pb-16 pt-28 sm:pb-20 sm:pt-32">
-      <div className="absolute inset-y-0 right-0 hidden w-[58%] lg:block">
+      <div className="absolute inset-y-0 right-0 hidden w-[100%] lg:block">
         <Image
-          src="https://images.unsplash.com/photo-1487412947147-5cebf100ffc2?w=1400&h=1000&fit=crop"
+          src="/hero.png"
           alt="Client receiving a skincare treatment"
           fill
           priority
-          sizes="58vw"
+          sizes="100vw"
           className="object-cover object-center"
         />
-        <div className="absolute inset-0 bg-gradient-to-r from-brand-blush via-brand-blush/20 to-transparent" />
+        <div className="absolute inset-0 bg-gradient-to-r from-brand-blush/30 via-brand-blush/5 to-transparent" />
+        <div className="absolute inset-y-0 left-0 w-32 bg-gradient-to-r from-brand-blush/30 to-transparent" />
       </div>
 
       <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
@@ -74,23 +59,17 @@ export default function Hero({
               hidden: {},
               visible: { transition: { staggerChildren: 0.1 } },
             }}
-            className="max-w-xl py-8 lg:py-0"
+            className="max-w-xl text-center lg:py-0 lg:text-left "
           >
-            <motion.p
-              variants={{ hidden: { opacity: 0, y: 20 }, visible: { opacity: 1, y: 0 } }}
-              transition={{ duration: 0.5, ease: "easeOut" }}
-              className="text-sm font-600 uppercase tracking-[0.18em] text-brand-primary"
-            >
-              NJ Beauty Bliss
-            </motion.p>
+           
             <motion.h1
               variants={{ hidden: { opacity: 0, y: 20 }, visible: { opacity: 1, y: 0 } }}
               transition={{ duration: 0.5, ease: "easeOut" }}
-              className="mt-3 font-heading text-4xl font-700 leading-[1.04] tracking-tight text-brand-charcoal sm:text-5xl lg:text-6xl"
+              className="mt-3 font-heading text-[80px] font-700 leading-[1.04] tracking-tight text-brand-charcoal sm:text-5xl lg:text-6xl"
             >
-              Your <em className="font-500 italic">Glow,</em>
+              Where <em className="font-500 italic">Beauty,</em>
               <br />
-              Our Science
+              Meets Elegance.
             </motion.h1>
             <motion.p
               variants={{ hidden: { opacity: 0, y: 20 }, visible: { opacity: 1, y: 0 } }}
@@ -102,7 +81,7 @@ export default function Hero({
             <motion.p
               variants={{ hidden: { opacity: 0, y: 20 }, visible: { opacity: 1, y: 0 } }}
               transition={{ duration: 0.5, ease: "easeOut" }}
-              className="mt-4 max-w-sm text-sm leading-relaxed text-brand-charcoal-muted"
+              className="mt-4 max-w-sm text-sm leading-relaxed text-brand-charcoal-muted mx-auto lg:mx-0"
             >
               Personalised beauty consultations, premium treatments, and a
               relaxing salon experience designed around you.
@@ -110,7 +89,7 @@ export default function Hero({
             <motion.div
               variants={{ hidden: { opacity: 0, y: 20 }, visible: { opacity: 1, y: 0 } }}
               transition={{ duration: 0.5, ease: "easeOut" }}
-              className="mt-7 flex flex-wrap gap-3"
+              className="mt-7 flex flex-wrap justify-center gap-3 lg:justify-start"
             >
               <a
                 href="https://wa.me/923080815888"
@@ -138,7 +117,7 @@ export default function Hero({
             className="relative mt-2 min-h-[360px] overflow-hidden rounded-2xl shadow-lg lg:hidden"
           >
             <Image
-              src="https://images.unsplash.com/photo-1487412947147-5cebf100ffc2?w=1000&h=800&fit=crop"
+              src="/hero.png"
               alt="Client receiving a skincare treatment"
               fill
               priority
@@ -147,7 +126,7 @@ export default function Hero({
             />
           </motion.div>
         </div>
-
+{/* 
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
@@ -166,7 +145,7 @@ export default function Hero({
           >
             Meet Your Expert
           </a>
-        </motion.div>
+        </motion.div> */}
       </div>
     </section>
   );
