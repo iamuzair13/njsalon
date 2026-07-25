@@ -161,7 +161,7 @@ export default function Home() {
             >
               {/* TODO: replace with real NJ Beauty Bliss photo */}
               <Image
-                src="https://images.unsplash.com/photo-1633681926022-84c23e8cb2d6?w=800&h=700&fit=crop"
+                src="/about4.jpg"
                 alt="Salon stylist working with a client"
                 width={800}
                 height={700}

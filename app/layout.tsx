@@ -19,7 +19,7 @@ const inter = Inter({
 });
 
 export const metadata: Metadata = {
-  title: "NJ Beauty Bliss — Premium Salon in Johar Town, Lahore",
+  title: "NJ Beauty Bliss : Premium Salon in Johar Town, Lahore",
   description:
     "Premium bridal makeup, hair styling, facials & nail care in Johar Town, Lahore. 4.9★ rated salon with a clean, relaxing atmosphere.",
 };

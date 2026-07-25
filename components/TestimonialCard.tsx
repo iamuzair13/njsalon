@@ -25,26 +25,34 @@ function StarRating({ rating }: { rating: number }) {
 
 function TestimonialFigure({ testimonial }: { testimonial: Testimonial }) {
   return (
-    <figure className="relative w-[300px] shrink-0 snap-center rounded-2xl border border-brand-border bg-white py-6 pl-5 pr-5 shadow-sm transition-shadow duration-200 hover:shadow-md sm:w-[340px] sm:snap-none sm:pl-16">
-      {/* TODO: replace with real NJ Beauty Bliss client photo */}
+    <figure className="relative flex w-[300px] shrink-0 snap-center flex-col items-center justify-center rounded-2xl border border-brand-border bg-white px-6 py-8 text-center shadow-sm transition-shadow duration-200 hover:shadow-md sm:w-[340px] sm:snap-none">
+      {/* Avatar */}
       <Image
         src={testimonial.avatar}
         alt={testimonial.author}
         width={80}
         height={80}
-        className="mb-4 h-12 w-12 rounded-full border-2 border-brand-border object-cover sm:absolute sm:-left-10 sm:top-0 sm:bottom-0 sm:my-auto sm:h-20 sm:w-20"
+        className="h-16 w-16 rounded-full border-2 border-brand-border object-cover"
       />
-      <figcaption>
+
+      {/* Name */}
+      <figcaption className="mt-4">
         <p className="text-sm font-600 text-brand-charcoal">{testimonial.author}</p>
-        <span className="mt-0.5 block text-xs text-brand-charcoal-muted">
-          {testimonial.label}
-        </span>
       </figcaption>
-      <blockquote className="mt-4">
+
+      {/* Quote with decorative marks */}
+      <blockquote className="relative z-10 mt-5 px-4">
+        <span className="pointer-events-none absolute -left-1 -top-4 font-heading text-5xl leading-none text-brand-primary/20 sm:text-6xl">
+          &ldquo;
+        </span>
         <p className="text-sm leading-relaxed text-brand-charcoal-muted">
-          &ldquo;{testimonial.quote}&rdquo;
+          {testimonial.quote}
         </p>
+        <span className="pointer-events-none absolute -bottom-10 -right-[-20px] font-heading text-5xl leading-none text-brand-primary/20 sm:text-6xl">
+          &rdquo;
+        </span>
       </blockquote>
+
       <StarRating rating={testimonial.rating} />
     </figure>
   );

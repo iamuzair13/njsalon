@@ -41,7 +41,7 @@ export default function AboutPage() {
           >
             {/* TODO: replace with real NJ Beauty Bliss photo */}
             <Image
-              src="https://images.unsplash.com/photo-1633681926022-84c23e8cb2d6?w=800&h=700&fit=crop"
+              src="/about.jfif"
               alt="NJ Beauty Bliss salon interior"
               width={800}
               height={700}
@@ -59,7 +59,7 @@ export default function AboutPage() {
               title="Beauty with a Personal Touch"
               center={false}
             />
-            <p className="mt-4 text-lg text-brand-charcoal-muted text-center">
+            <p className="mt-4 text-lg text-brand-charcoal-muted text-center sm:text-start">
               NJ Beauty Bliss is a trusted beauty salon in the heart of Johar
               Town, Lahore, known for its clean, relaxing atmosphere and skilled
               team of stylists and beauty specialists. From everyday haircare to
@@ -87,7 +87,7 @@ export default function AboutPage() {
               <h3 className="mt-4 font-heading text-2xl font-600 text-brand-charcoal">
                 Our Mission
               </h3>
-              <p className="mt-3 text-base text-brand-charcoal-muted">
+              <p className="mt-3 text-base  text-brand-charcoal-muted">
                 To provide every client with a premium beauty experience in a
                 clean, relaxing environment — delivering results that exceed
                 expectations every single time.
