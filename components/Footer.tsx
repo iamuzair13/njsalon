@@ -1,5 +1,9 @@
 import Link from "next/link";
 import { MapPin, Phone, Clock, MessageCircle } from "lucide-react";
+import { siteConfig } from "@/config/site";
+
+const { footer, business, sections } = siteConfig;
+const social = business.socialLinks;
 
 function FacebookIcon({ className }: { className?: string }) {
   return (
@@ -26,38 +30,43 @@ export default function Footer() {
           {/* Brand */}
           <div className="flex flex-col items-center">
             <h3 className="font-heading text-xl font-600">
-              NJ Beauty Bliss
+              {business.businessName}
             </h3>
             <p className="mt-3 max-w-xs text-sm text-white/70">
-              Premium beauty salon in Johar Town, Lahore. Bridal makeup, hair
-              styling, facials & nail care.
+              {footer.description}
             </p>
             <div className="mt-4 flex gap-3">
-              <a
-                href="https://www.facebook.com/njbeautybliss1"
-                target="_blank"
-                aria-label="Facebook"
-                className="flex h-9 w-9 items-center justify-center rounded-full bg-white/10 transition-colors hover:bg-brand-primary"
-              >
-                <FacebookIcon className="h-4 w-4" />
-              </a>
-              <a
-                href="https://www.instagram.com/nj_beauty_bliss?igsh=c2djNmQ3dWIwaDUy"
-                target="_blank"
-                aria-label="Instagram"
-                className="flex h-9 w-9 items-center justify-center rounded-full bg-white/10 transition-colors hover:bg-brand-primary"
-              >
-                <InstagramIcon className="h-4 w-4" />
-              </a>
-              <a
-                href="https://wa.me/923080815888"
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label="WhatsApp"
-                className="flex h-9 w-9 items-center justify-center rounded-full bg-white/10 transition-colors hover:bg-brand-primary"
-              >
-                <MessageCircle className="h-4 w-4" />
-              </a>
+              {social.facebook && (
+                <a
+                  href={social.facebook}
+                  target="_blank"
+                  aria-label="Facebook"
+                  className="flex h-9 w-9 items-center justify-center rounded-full bg-white/10 transition-colors hover:bg-brand-primary"
+                >
+                  <FacebookIcon className="h-4 w-4" />
+                </a>
+              )}
+              {social.instagram && (
+                <a
+                  href={social.instagram}
+                  target="_blank"
+                  aria-label="Instagram"
+                  className="flex h-9 w-9 items-center justify-center rounded-full bg-white/10 transition-colors hover:bg-brand-primary"
+                >
+                  <InstagramIcon className="h-4 w-4" />
+                </a>
+              )}
+              {social.whatsapp && (
+                <a
+                  href={social.whatsapp}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label="WhatsApp"
+                  className="flex h-9 w-9 items-center justify-center rounded-full bg-white/10 transition-colors hover:bg-brand-primary"
+                >
+                  <MessageCircle className="h-4 w-4" />
+                </a>
+              )}
             </div>
           </div>
 
@@ -67,34 +76,16 @@ export default function Footer() {
           {/* Quick links — horizontal */}
           <div>
             <h4 className="text-sm font-600 uppercase tracking-wider text-white/80">
-              Quick Links
+              {sections.footer.quickLinksTitle}
             </h4>
             <ul className="mt-3 flex flex-wrap justify-center gap-x-4 gap-y-2">
-              <li>
-                <Link href="/" className="text-sm text-white/70 transition-colors hover:text-brand-primary">
-                  Home
-                </Link>
-              </li>
-              <li>
-                <Link href="/about" className="text-sm text-white/70 transition-colors hover:text-brand-primary">
-                  About
-                </Link>
-              </li>
-              <li>
-                <Link href="/services" className="text-sm text-white/70 transition-colors hover:text-brand-primary">
-                  Services
-                </Link>
-              </li>
-              <li>
-                <Link href="/gallery" className="text-sm text-white/70 transition-colors hover:text-brand-primary">
-                  Gallery
-                </Link>
-              </li>
-              <li>
-                <Link href="/contact" className="text-sm text-white/70 transition-colors hover:text-brand-primary">
-                  Contact
-                </Link>
-              </li>
+              {footer.quickLinks.map((link) => (
+                <li key={link.href}>
+                  <Link href={link.href} className="text-sm text-white/70 transition-colors hover:text-brand-primary">
+                    {link.label}
+                  </Link>
+                </li>
+              ))}
             </ul>
           </div>
 
@@ -105,29 +96,29 @@ export default function Footer() {
           <div className="grid w-full max-w-sm grid-cols-2 gap-6">
             <div className="text-start">
               <h4 className="text-sm font-600 uppercase tracking-wider text-white/80">
-                Visit Us
+                {sections.footer.visitUsTitle}
               </h4>
               <ul className="mt-3 space-y-3 text-start">
                 <li className="flex items-start justify-start gap-2 text-xs text-white/70">
-                  <MapPin className="mt-0.5 h-3.5 w-3.5 shrink-0 text-brand-primary-light" />
-                  Block J, Johar Town Phase 2, Lahore
+                  <MapPin className="mt-0.5 h-3.5 w-3.5 shrink-0 text-white" />
+                  {business.address}
                 </li>
                 <li className="flex items-center justify-start gap-2 text-xs text-white/70">
-                  <Phone className="h-3.5 w-3.5 shrink-0 text-brand-primary-light" />
-                  +92 308 0815888
+                  <Phone className="h-3.5 w-3.5 shrink-0 text-white" />
+                  {business.phone}
                 </li>
               </ul>
             </div>
             <div className="text-start">
               <h4 className="text-sm font-600 uppercase tracking-wider text-white/80">
-                Hours
+                {sections.footer.hoursTitle}
               </h4>
               <ul className="mt-3 space-y-2">
                 <li className="flex items-center justify-start gap-2 text-xs text-white/70">
                   <Clock className="h-3.5 w-3.5 shrink-0 text-brand-primary-light" />
-                  Mon–Sat: 10–8
+                  {business.openingHours.weekdays}
                 </li>
-                <li className="text-xs text-white/70">Sun: 12–6</li>
+                <li className="text-xs text-white/70">{business.openingHours.weekend}</li>
               </ul>
             </div>
           </div>
@@ -138,108 +129,94 @@ export default function Footer() {
         <div className="hidden gap-8 lg:grid lg:grid-cols-4">
           <div>
             <h3 className="font-heading text-xl font-600">
-              NJ Beauty Bliss
+              {business.businessName}
             </h3>
             <p className="mt-3 text-sm text-white/70">
-              Premium beauty salon in Johar Town, Lahore. Bridal makeup, hair
-              styling, facials & nail care.
+              {footer.description}
             </p>
             <div className="mt-4 flex gap-3">
-              <a
-                href="https://www.facebook.com/njbeautybliss1"
-                target="_blank"
-                aria-label="Facebook"
-                className="flex h-9 w-9 items-center justify-center rounded-full bg-white/10 transition-colors hover:bg-brand-primary"
-              >
-                <FacebookIcon className="h-4 w-4" />
-              </a>
-              <a
-                href="https://www.instagram.com/nj_beauty_bliss?igsh=c2djNmQ3dWIwaDUy"
-                target="_blank"
-                aria-label="Instagram"
-                className="flex h-9 w-9 items-center justify-center rounded-full bg-white/10 transition-colors hover:bg-brand-primary"
-              >
-                <InstagramIcon className="h-4 w-4" />
-              </a>
-              <a
-                href="https://wa.me/923080815888"
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label="WhatsApp"
-                className="flex h-9 w-9 items-center justify-center rounded-full bg-white/10 transition-colors hover:bg-brand-primary"
-              >
-                <MessageCircle className="h-4 w-4" />
-              </a>
+              {social.facebook && (
+                <a
+                  href={social.facebook}
+                  target="_blank"
+                  aria-label="Facebook"
+                  className="flex h-9 w-9 items-center justify-center rounded-full bg-white/10 transition-colors hover:bg-brand-primary"
+                >
+                  <FacebookIcon className="h-4 w-4" />
+                </a>
+              )}
+              {social.instagram && (
+                <a
+                  href={social.instagram}
+                  target="_blank"
+                  aria-label="Instagram"
+                  className="flex h-9 w-9 items-center justify-center rounded-full bg-white/10 transition-colors hover:bg-brand-primary"
+                >
+                  <InstagramIcon className="h-4 w-4" />
+                </a>
+              )}
+              {social.whatsapp && (
+                <a
+                  href={social.whatsapp}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label="WhatsApp"
+                  className="flex h-9 w-9 items-center justify-center rounded-full bg-white/10 transition-colors hover:bg-brand-primary"
+                >
+                  <MessageCircle className="h-4 w-4" />
+                </a>
+              )}
             </div>
           </div>
 
           <div>
             <h4 className="text-sm font-600 uppercase tracking-wider text-white/80">
-              Quick Links
+              {sections.footer.quickLinksTitle}
             </h4>
             <ul className="mt-4 space-y-2">
-              <li>
-                <Link href="/" className="text-sm text-white/70 transition-colors hover:text-brand-primary">
-                  Home
-                </Link>
-              </li>
-              <li>
-                <Link href="/about" className="text-sm text-white/70 transition-colors hover:text-brand-primary">
-                  About
-                </Link>
-              </li>
-              <li>
-                <Link href="/services" className="text-sm text-white/70 transition-colors hover:text-brand-primary">
-                  Services
-                </Link>
-              </li>
-              <li>
-                <Link href="/gallery" className="text-sm text-white/70 transition-colors hover:text-brand-primary">
-                  Gallery
-                </Link>
-              </li>
-              <li>
-                <Link href="/contact" className="text-sm text-white/70 transition-colors hover:text-brand-primary">
-                  Contact
-                </Link>
-              </li>
+              {footer.quickLinks.map((link) => (
+                <li key={link.href}>
+                  <Link href={link.href} className="text-sm text-white/70 transition-colors hover:text-brand-primary">
+                    {link.label}
+                  </Link>
+                </li>
+              ))}
             </ul>
           </div>
 
           <div>
             <h4 className="text-sm font-600 uppercase tracking-wider text-white/80">
-              Visit Us
+              {sections.footer.visitUsTitle}
             </h4>
             <ul className="mt-4 space-y-3">
               <li className="flex items-start gap-2 text-sm text-white/70">
-                <MapPin className="mt-0.5 h-4 w-4 shrink-0 text-brand-primary-light" />
-                Block J, Johar Town Phase 2, Lahore, Pakistan
+                <MapPin className="mt-0.5 h-4 w-4 shrink-0 text-white" />
+                {business.address}
               </li>
               <li className="flex items-center gap-2 text-sm text-white/70">
-                <Phone className="h-4 w-4 shrink-0 text-brand-primary-light" />
-                +92 308 0815888
+                <Phone className="h-4 w-4 shrink-0 text-white" />
+                {business.phone}
               </li>
             </ul>
           </div>
 
           <div>
             <h4 className="text-sm font-600 uppercase tracking-wider text-white/80">
-              Hours
+              {sections.footer.hoursTitle}
             </h4>
             <ul className="mt-4 space-y-2">
               <li className="flex items-center gap-2 text-sm text-white/70">
-                <Clock className="h-4 w-4 shrink-0 text-brand-primary-light" />
-                Mon – Sat: 10am – 8pm
+                <Clock className="h-4 w-4 shrink-0 text-white" />
+                {business.openingHours.weekdays}
               </li>
-              <li className="text-sm text-white/70 pl-6">Sunday: 12pm – 6pm</li>
+              <li className="text-sm text-white/70 pl-6">{business.openingHours.weekend}</li>
             </ul>
-           
           </div>
         </div>
 
         <div className="mt-10 border-t border-white/10 pt-6 text-center sm:mt-12">
           <p className="text-sm text-white/50">
-            © {new Date().getFullYear()} NJ Beauty Bliss. All rights reserved.
+            © {new Date().getFullYear()} {footer.copyright}
           </p>
         </div>
       </div>

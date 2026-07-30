@@ -4,6 +4,9 @@ import { useState, useRef, useCallback } from "react";
 import Image from "next/image";
 import { motion } from "framer-motion";
 import { MoveHorizontal } from "lucide-react";
+import { siteConfig } from "@/config/site";
+
+const { sections } = siteConfig;
 
 export type BeforeAfterItem = {
   beforeSrc: string;
@@ -87,7 +90,6 @@ export default function BeforeAfterSlider({ item }: BeforeAfterSliderProps) {
     >
       {/* After image (full, bottom layer) */}
       <div className="absolute inset-0">
-        {/* TODO: replace with real NJ Beauty Bliss after-treatment photo */}
         <Image
           src={item.afterSrc}
           alt={item.afterAlt}
@@ -96,7 +98,7 @@ export default function BeforeAfterSlider({ item }: BeforeAfterSliderProps) {
           sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 600px"
         />
         <span className="absolute bottom-3 right-3 rounded-full bg-brand-charcoal/70 px-3 py-1 text-xs font-600 uppercase tracking-wider text-white backdrop-blur-sm">
-          After
+          {sections.beforeAfter.afterLabel}
         </span>
       </div>
 
@@ -105,7 +107,6 @@ export default function BeforeAfterSlider({ item }: BeforeAfterSliderProps) {
         className="absolute inset-0 overflow-hidden"
         style={{ width: `${position}%` }}
       >
-        {/* TODO: replace with real NJ Beauty Bliss before-treatment photo */}
         <Image
           src={item.beforeSrc}
           alt={item.beforeAlt}
@@ -114,7 +115,7 @@ export default function BeforeAfterSlider({ item }: BeforeAfterSliderProps) {
           sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 600px"
         />
         <span className="absolute bottom-3 left-3 rounded-full bg-brand-charcoal/70 px-3 py-1 text-xs font-600 uppercase tracking-wider text-white backdrop-blur-sm">
-          Before
+          {sections.beforeAfter.beforeLabel}
         </span>
       </div>
 

@@ -4,6 +4,9 @@ import { useState } from "react";
 import Image from "next/image";
 import { motion, AnimatePresence } from "framer-motion";
 import { X } from "lucide-react";
+import { siteConfig } from "@/config/site";
+
+const { sections } = siteConfig;
 
 export type GalleryImage = {
   src: string;
@@ -69,7 +72,6 @@ export default function GalleryGrid({ images, categories }: GalleryGridProps) {
             className="relative cursor-pointer overflow-hidden rounded-xl shadow-sm"
             onClick={() => setLightboxIndex(index)}
           >
-            {/* TODO: replace with real NJ Beauty Bliss photo */}
             <Image
               src={img.src}
               alt={img.alt}
@@ -97,7 +99,7 @@ export default function GalleryGrid({ images, categories }: GalleryGridProps) {
                 e.stopPropagation();
                 setLightboxIndex(null);
               }}
-              aria-label="Close"
+              aria-label={sections.gallery.closeAriaLabel}
             >
               <X className="h-8 w-8" />
             </button>
@@ -107,7 +109,7 @@ export default function GalleryGrid({ images, categories }: GalleryGridProps) {
                 e.stopPropagation();
                 handlePrev();
               }}
-              aria-label="Previous"
+              aria-label={sections.gallery.prevAriaLabel}
             >
               &#8249;
             </button>
@@ -117,7 +119,7 @@ export default function GalleryGrid({ images, categories }: GalleryGridProps) {
                 e.stopPropagation();
                 handleNext();
               }}
-              aria-label="Next"
+              aria-label={sections.gallery.nextAriaLabel}
             >
               &#8250;
             </button>
@@ -129,7 +131,6 @@ export default function GalleryGrid({ images, categories }: GalleryGridProps) {
               onClick={(e) => e.stopPropagation()}
               className="relative max-h-[85vh] max-w-3xl"
             >
-              {/* TODO: replace with real NJ Beauty Bliss photo */}
               <Image
                 src={filteredImages[lightboxIndex].src}
                 alt={filteredImages[lightboxIndex].alt}

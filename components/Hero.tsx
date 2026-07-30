@@ -4,6 +4,10 @@ import Link from "next/link";
 import Image from "next/image";
 import { motion } from "framer-motion";
 import { MessageCircle, ArrowRight } from "lucide-react";
+import { siteConfig, getBookingUrl } from "@/config/site";
+
+const bookingUrl = getBookingUrl();
+const { sections } = siteConfig;
 
 type HeroProps = {
   variant?: "home" | "inner";
@@ -28,19 +32,22 @@ export default function Hero({
             transition={{ duration: 0.5, ease: "easeOut", delay: 0.1 }}
             className="font-heading text-4xl font-700 text-brand-charcoal sm:text-5xl"
           >
-            {title}
+            {title ?? siteConfig.business.tagline}
           </motion.h1>
         </div>
       </section>
     );
   }
 
+  const heroConfig = siteConfig.hero;
+  const heroImage = imageSrc ?? heroConfig.backgroundImage ?? "/hero1.png";
+
   return (
     <section className="relative isolate overflow-hidden bg-brand-blush pb-16 pt-28 sm:pb-20 sm:pt-32">
       <div className="absolute inset-y-0 right-0 hidden w-[100%] lg:block">
         <Image
-          src="/hero1.png"
-          alt="Client receiving a skincare treatment"
+          src={heroImage}
+          alt={sections.hero.backgroundImageAlt}
           fill
           priority
           sizes="100vw"
@@ -67,9 +74,7 @@ export default function Hero({
               transition={{ duration: 0.5, ease: "easeOut" }}
               className="mt-3 font-body text-4xl font-900 leading-[1.2] tracking-[-0.08em] text-brand-charcoal sm:text-5xl lg:text-[70.36px]"
             >
-              Where <em className="font-heading font-900 italic tracking-[-0.06em]">Beauty,</em>
-              <br />
-              Meets Elegance.
+              {title ?? heroConfig.title}
             </motion.h1>
            
             <motion.p
@@ -77,8 +82,7 @@ export default function Hero({
               transition={{ duration: 0.5, ease: "easeOut" }}
               className="mt-4 max-w-lg text-[18px] leading-relaxed text-brand-charcoal-muted mx-auto lg:mx-0"
             >
-              Personalised beauty consultations, premium treatments, and a
-              relaxing salon experience designed around you.
+              {subtitle ?? heroConfig.description}
             </motion.p>
             <motion.div
               variants={{ hidden: { opacity: 0, y: 20 }, visible: { opacity: 1, y: 0 } }}
@@ -86,21 +90,23 @@ export default function Hero({
               className="mt-7 flex flex-wrap justify-center gap-3 lg:justify-start"
             >
               <a
-                href="https://wa.me/923080815888"
+                href={heroConfig.primaryCTA.href}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="inline-flex items-center gap-2 rounded-full bg-brand-primary px-5 py-3 text-sm font-600 text-white transition-all duration-200 hover:scale-[1.02] hover:bg-brand-primary-dark focus:outline-none focus:ring-2 focus:ring-brand-primary focus:ring-offset-2"
               >
                 <MessageCircle className="h-4 w-4 fill-white" />
-                Book Consultation
+                {heroConfig.primaryCTA.label}
               </a>
-              <Link
-                href="/services"
-                className="inline-flex items-center gap-2 rounded-full border border-brand-charcoal/25 bg-white/70 px-5 py-3 text-sm font-600 text-brand-charcoal transition-all duration-200 hover:scale-[1.02] hover:border-brand-primary hover:text-brand-primary focus:outline-none focus:ring-2 focus:ring-brand-primary focus:ring-offset-2"
-              >
-                Explore Services
-                <ArrowRight className="h-4 w-4" />
-              </Link>
+              {heroConfig.secondaryCTA && (
+                <Link
+                  href={heroConfig.secondaryCTA.href}
+                  className="inline-flex items-center gap-2 rounded-full border border-brand-charcoal/25 bg-white/70 px-5 py-3 text-sm font-600 text-brand-charcoal transition-all duration-200 hover:scale-[1.02] hover:border-brand-primary hover:text-brand-primary focus:outline-none focus:ring-2 focus:ring-brand-primary focus:ring-offset-2"
+                >
+                  {heroConfig.secondaryCTA.label}
+                  <ArrowRight className="h-4 w-4" />
+                </Link>
+              )}
             </motion.div>
           </motion.div>
 
@@ -111,8 +117,8 @@ export default function Hero({
             className="relative mt-2 min-h-[360px] overflow-hidden rounded-2xl shadow-lg lg:hidden"
           >
             <Image
-              src="/hero1.png"
-              alt="Client receiving a skincare treatment"
+              src={heroImage}
+              alt={sections.hero.heroImageAlt}
               fill
               priority
               sizes="(max-width: 1024px) 100vw, 0px"
@@ -120,26 +126,6 @@ export default function Hero({
             />
           </motion.div>
         </div>
-{/* 
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5, ease: "easeOut", delay: 0.45 }}
-          className="relative mx-auto mt-5 max-w-md rounded-xl bg-brand-charcoal/80 p-5 text-white shadow-xl backdrop-blur-md lg:absolute lg:bottom-6 lg:right-8 lg:mt-0"
-        >
-          <p className="text-sm font-600">Ready to reveal your best self?</p>
-          <p className="mt-2 text-xs leading-relaxed text-white/80">
-            Book a personalised consultation and discover the treatment made for you.
-          </p>
-          <a
-            href="https://wa.me/923080815888"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="mt-4 flex w-full items-center justify-center rounded-full bg-white px-4 py-2.5 text-xs font-600 text-brand-charcoal transition-transform duration-200 hover:scale-[1.02]"
-          >
-            Meet Your Expert
-          </a>
-        </motion.div> */}
       </div>
     </section>
   );

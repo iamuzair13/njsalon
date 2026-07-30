@@ -9,11 +9,16 @@ import VideoIntroSection from "@/components/VideoIntroSection";
 import BeforeAfterSection from "@/components/BeforeAfterSection";
 import FAQSection from "@/components/FAQSection";
 import Counter from "@/components/Counter";
-import { homeServicePreview } from "@/data/services";
+import { siteConfig, getHomeServicePreview, getBookingUrl, resolveText } from "@/config/site";
+import { fadeInUp, fadeInLeft, fadeInRight, viewportOnce, easeOutExpo, easeOutExpoDelayed } from "@/config/animation";
 import { Star, ArrowRight, MapPin } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import { motion } from "framer-motion";
+
+const homeServices = getHomeServicePreview();
+const { features, stats, business, about, sections } = siteConfig;
+const bookingUrl = getBookingUrl();
 
 export default function Home() {
   return (
@@ -21,12 +26,12 @@ export default function Home() {
       <Hero />
 
       {/* Trust strip */}
+      {features.showTrustStrip && (
       <section className="bg-brand-cream py-8">
         <motion.div
-          initial={{ opacity: 0, y: 24, filter: "blur(12px)" }}
-          whileInView={{ opacity: 1, y: 0, filter: "blur(0px)" }}
-          viewport={{ once: true, amount: 0.2 }}
-          transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
+          {...fadeInUp}
+          viewport={viewportOnce}
+          transition={easeOutExpo}
           className="mx-auto flex max-w-7xl flex-col items-center justify-center gap-3 px-4 text-center sm:flex-row sm:gap-6 sm:px-6 lg:px-8"
         >
           <div className="flex items-center gap-2">
@@ -39,46 +44,44 @@ export default function Home() {
               ))}
             </div>
             <span className="text-base font-600 text-brand-charcoal">
-              4.9 rated
+              {business.rating} rated
             </span>
           </div>
           <span className="hidden h-5 w-px bg-brand-border sm:block" />
           <span className="text-base text-brand-charcoal-muted">
-            30+ happy clients on Google
+            {sections.home.trustStrip.googleReviewsText}
           </span>
           <span className="hidden h-5 w-px bg-brand-border sm:block" />
           <span className="flex items-center gap-1.5 text-base text-brand-charcoal-muted">
             <MapPin className="h-4 w-4 text-brand-primary" />
-            Johar Town, Lahore
+            {sections.home.trustStrip.locationText}
           </span>
         </motion.div>
       </section>
+      )}
 
       {/* Services preview */}
+      {features.showServices && (
       <section className="bg-white py-16 sm:py-24">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <SectionHeading
-            eyebrow=""
-            title="What We Offer"
-            subtitle="From everyday haircare to full bridal makeovers, our skilled team offers a full range of beauty services."
+            eyebrow={sections.home.servicesPreview.eyebrow}
+            title={sections.home.servicesPreview.title}
+            subtitle={sections.home.servicesPreview.subtitle}
           />
           <div className="mt-12 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4">
-            {homeServicePreview.map((service, index) => (
+            {homeServices.map((service, index) => (
               <motion.div
                 key={service.id}
-                initial={{ opacity: 0, y: 24, filter: "blur(12px)" }}
-                whileInView={{ opacity: 1, y: 0, filter: "blur(0px)" }}
-                viewport={{ once: true, amount: 0.2 }}
-                transition={{
-                  duration: 0.7,
-                  ease: [0.22, 1, 0.36, 1],
-                  delay: index * 0.1,
-                }}
+                {...fadeInUp}
+                viewport={viewportOnce}
+                transition={easeOutExpoDelayed(index * 0.1)}
               >
                 <ServiceCard
                   icon={service.icon}
                   title={service.title}
                   description={service.description}
+                  image={service.image}
                 />
               </motion.div>
             ))}
@@ -88,81 +91,62 @@ export default function Home() {
               href="/services"
               className="inline-flex items-center gap-2 text-base font-600 text-brand-primary transition-colors hover:text-brand-primary-dark"
             >
-              View All Services
+              {sections.home.servicesPreview.viewAllText}
               <ArrowRight className="h-4 w-4" />
             </Link>
           </div>
         </div>
       </section>
+      )}
 
       {/* About teaser */}
+      {features.showAbout && (
       <section className="bg-brand-cream px-3 py-10 sm:px-6 sm:py-16 lg:px-8 lg:py-20">
         <div className="mx-auto max-w-7xl overflow-hidden rounded-[1.75rem] bg-white px-6 py-10 shadow-sm sm:px-10 sm:py-14 lg:px-16 lg:py-16">
           <div className="grid items-center gap-10 lg:grid-cols-[1fr_0.92fr] lg:gap-16">
             <motion.div
-              initial={{ opacity: 0, x: -24, filter: "blur(12px)" }}
-              whileInView={{ opacity: 1, x: 0, filter: "blur(0px)" }}
-              viewport={{ once: true, amount: 0.2 }}
-              transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
+              {...fadeInLeft}
+              viewport={viewportOnce}
+              transition={easeOutExpo}
               className="text-center lg:text-left"
             >
-              <span className="inline-block rounded-full bg-brand-primary px-4 py-1.5 text-sm font-600 text-white">About us</span>
+              <span className="inline-block rounded-full bg-brand-primary px-4 py-1.5 text-sm font-600 text-white">{sections.home.aboutTeaser.badge}</span>
               <h2 className="mt-3 max-w-lg font-heading text-4xl font-700 leading-[1.08] tracking-tight text-brand-charcoal sm:text-5xl">
-                Your Beauty, Our Passion
+                {sections.home.aboutTeaser.title}
               </h2>
               <p className="mx-auto mt-5 max-w-lg text-sm leading-relaxed text-brand-charcoal-muted sm:text-base lg:mx-0">
-                At NJ Beauty Bliss, we believe every visit should leave you feeling
-                confident, cared for, and beautifully yourself. Our expert team
-                creates personalised beauty experiences with thoughtful detail.
+                {resolveText(sections.home.aboutTeaser.description)}
               </p>
 
               <div className="mt-8 grid grid-cols-2 gap-x-8 gap-y-7 text-left sm:mt-10">
-                <div className="border-t-2 border-brand-primary-light pt-3">
-                  <p className="font-body text-[20px] font-700 text-brand-charcoal sm:text-[28px]">
-                    <Counter to={5} suffix="+" /> Years
-                  </p>
-                  <p className="mt-1 text-sm leading-relaxed text-brand-charcoal-muted">of beauty expertise</p>
-                </div>
-                <div className="border-t-2 border-brand-primary-light pt-3">
-                  <p className="font-body text-[20px] font-700 text-brand-charcoal sm:text-[28px]">
-                    <Counter to={20} suffix="+" /> Services
-                  </p>
-                  <p className="mt-1 text-sm leading-relaxed text-brand-charcoal-muted">tailored to your needs</p>
-                </div>
-                <div className="border-t-2 border-brand-primary-light pt-3">
-                  <p className="font-body text-[20px] font-700 text-brand-charcoal sm:text-[28px]">
-                    <Counter to={999} suffix="+" /> Clients
-                  </p>
-                  <p className="mt-1 text-sm leading-relaxed text-brand-charcoal-muted">who trust our care</p>
-                </div>
-                <div className="border-t-2 border-brand-primary-light pt-3">
-                  <p className="font-body text-[20px] font-700 text-brand-charcoal sm:text-[28px]">
-                    <Counter to={4.9} decimals={1} /> Rating
-                  </p>
-                  <p className="mt-1 text-sm leading-relaxed text-brand-charcoal-muted">from happy guests</p>
-                </div>
+                {stats.map((stat, i) => (
+                  <div key={i} className="pt-3">
+                    <p className="font-body text-[20px] font-700 text-brand-charcoal sm:text-[28px]">
+                      <Counter to={stat.value} suffix={stat.suffix} decimals={stat.decimals} /> {stat.label.split(" ")[0]}
+                    </p>
+                    <p className="mt-1 text-sm leading-relaxed text-brand-charcoal-muted">{stat.label.split(" ").slice(1).join(" ")}</p>
+                  </div>
+                ))}
               </div>
 
               <Link
                 href="/about"
                 className="mt-8 inline-flex items-center gap-2 text-base font-600 text-brand-primary transition-colors hover:text-brand-primary-dark"
               >
-                Discover Our Story
+                {sections.home.aboutTeaser.discoverStoryText}
                 <ArrowRight className="h-4 w-4" />
               </Link>
             </motion.div>
 
             <motion.div
-              initial={{ opacity: 0, x: 24, filter: "blur(12px)" }}
-              whileInView={{ opacity: 1, x: 0, filter: "blur(0px)" }}
-              viewport={{ once: true, amount: 0.2 }}
-              transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
+              {...fadeInRight}
+              viewport={viewportOnce}
+              transition={easeOutExpo}
               className="relative mx-auto w-full max-w-xl"
             >
-              {/* TODO: replace with real NJ Beauty Bliss photo */}
               <Image
-                src="/about4.jpg"
-                alt="Salon stylist working with a client"
+                src={about.image}
+                alt={sections.home.aboutTeaser.aboutImageAlt}
                 width={800}
                 height={700}
                 className="aspect-[4/5] w-full rounded-xl object-cover shadow-lg lg:aspect-[4/4.65]"
@@ -171,22 +155,25 @@ export default function Home() {
           </div>
         </div>
       </section>
+      )}
 
       {/* Video intro */}
-      <VideoIntroSection />
+      {features.showVideo && <VideoIntroSection />}
 
       {/* Before & After results */}
-      <BeforeAfterSection />
+      {features.showBeforeAfter && <BeforeAfterSection />}
 
       {/* Testimonials */}
+      {features.showTestimonials && (
       <section className="bg-brand-cream py-16 sm:py-24">
         <TestimonialCard />
       </section>
+      )}
 
-      <FAQSection />
+      {features.showFAQ && <FAQSection />}
 
       {/* CTA banner */}
-      <CTASection />
+      {features.showCTA && <CTASection />}
     </>
   );
 }

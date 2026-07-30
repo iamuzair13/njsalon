@@ -6,67 +6,70 @@ import CTASection from "@/components/CTASection";
 import Image from "next/image";
 import { motion } from "framer-motion";
 import { Target, Eye } from "lucide-react";
+import { siteConfig } from "@/config/site";
+import { fadeInLeft, fadeInRight, fadeInUp, viewportOnce, easeOutExpo, easeOutExpoDelayed } from "@/config/animation";
 
-const team = [
-  {
-    name: "Stylist 1",
-    specialty: "Hair & Bridal Makeup",
-    image: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=400&h=400&fit=crop",
-  },
-  {
-    name: "Stylist 2",
-    specialty: "Facials & Skin Care",
-    image: "https://images.unsplash.com/photo-1580489944761-15a32d82e9d7?w=400&h=400&fit=crop",
-  },
-  {
-    name: "Stylist 3",
-    specialty: "Nail Art & Care",
-    image: "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=400&h=400&fit=crop",
-  },
-];
+const { about, business, team, features, sections } = siteConfig;
 
 export default function AboutPage() {
   return (
     <>
 
-      {/* Salon story */}
+      {/* Story */}
       <section className="bg-white py-16 sm:py-24">
-        <div className="mx-auto max-sm:pt-6 flex max-w-7xl flex-col-reverse items-center gap-12 px-4 sm:px-6 lg:grid lg:grid-cols-2 lg:px-8">
-          <motion.div
-            initial={{ opacity: 0, x: -24, filter: "blur(12px)" }}
-            whileInView={{ opacity: 1, x: 0, filter: "blur(0px)" }}
-            viewport={{ once: true, amount: 0.2 }}
-            transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
-            className="relative"
-          >
-            {/* TODO: replace with real NJ Beauty Bliss photo */}
-            <Image
-              src="/about.jfif"
-              alt="NJ Beauty Bliss salon interior"
-              width={800}
-              height={700}
-              className="rounded-xl shadow-lg"
-            />
-          </motion.div>
-          <motion.div
-            initial={{ opacity: 0, x: 24, filter: "blur(12px)" }}
-            whileInView={{ opacity: 1, x: 0, filter: "blur(0px)" }}
-            viewport={{ once: true, amount: 0.2 }}
-            transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
-          >
-            <SectionHeading
-              eyebrow="Our Story"
-              title="Beauty with a Personal Touch"
-              center={false}
-            />
-            <p className="mt-4 text-lg text-brand-charcoal-muted text-center sm:text-start">
-              NJ Beauty Bliss is a trusted beauty salon in the heart of Johar
-              Town, Lahore, known for its clean, relaxing atmosphere and skilled
-              team of stylists and beauty specialists. From everyday haircare to
-              full bridal makeovers, every client is treated with personal
-              attention and care.
-            </p>
-          </motion.div>
+        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+          <div className="grid items-center gap-12 lg:grid-cols-2 lg:gap-16">
+            <motion.div
+              {...fadeInLeft}
+              viewport={viewportOnce}
+              transition={easeOutExpo}
+              className="relative"
+            >
+              <div className="relative aspect-[4/5] overflow-hidden rounded-[1.75rem] shadow-lg">
+                <Image
+                  src={about.image}
+                  alt={business.businessName}
+                  fill
+                  className="object-cover"
+                  sizes="(max-width: 1024px) 100vw, 50vw"
+                />
+              </div>
+              <div className="absolute -bottom-6 -right-4 hidden rounded-2xl bg-brand-primary px-6 py-4 text-white shadow-xl sm:block">
+                <p className="font-heading text-3xl font-700 leading-none">{business.experienceYears}</p>
+                <p className="mt-1 text-sm font-500 text-white/90">{sections.about.experienceBadgeLabel}</p>
+              </div>
+            </motion.div>
+
+            <motion.div
+              {...fadeInRight}
+              viewport={viewportOnce}
+              transition={easeOutExpo}
+            >
+              <span className="inline-block rounded-full bg-brand-blush px-4 py-1.5 text-sm font-600 uppercase tracking-wider text-brand-primary">
+                {about.subHeading}
+              </span>
+              <h2 className="mt-4 font-heading text-3xl font-700 leading-tight tracking-tight text-brand-charcoal sm:text-4xl">
+                {about.heading}
+              </h2>
+              <p className="mt-5 text-base leading-relaxed text-brand-charcoal-muted sm:text-lg">
+                {about.story}
+              </p>
+
+              <div className="mt-8 space-y-4">
+                {about.features.map((feature, i) => (
+                  <div key={i} className="flex items-start gap-4">
+                    <div className="mt-0.5 flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-brand-blush">
+                      <div className="h-2.5 w-2.5 rounded-full bg-brand-primary" />
+                    </div>
+                    <div>
+                      <p className="font-600 text-brand-charcoal">{feature.title}</p>
+                      <p className="mt-0.5 text-sm text-brand-charcoal-muted">{feature.description}</p>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </motion.div>
+          </div>
         </div>
       </section>
 
@@ -75,41 +78,35 @@ export default function AboutPage() {
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 gap-8 md:grid-cols-2">
             <motion.div
-              initial={{ opacity: 0, y: 24, filter: "blur(12px)" }}
-              whileInView={{ opacity: 1, y: 0, filter: "blur(0px)" }}
-              viewport={{ once: true, amount: 0.2 }}
-              transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
+              {...fadeInUp}
+              viewport={viewportOnce}
+              transition={easeOutExpo}
               className="rounded-xl border border-brand-border bg-white p-8 shadow-sm"
             >
               <div className="flex h-12 w-12 items-center justify-center rounded-full bg-brand-primary-light">
                 <Target className="h-6 w-6 text-brand-primary" />
               </div>
               <h3 className="mt-4 font-heading text-2xl font-600 text-brand-charcoal">
-                Our Mission
+                {sections.about.missionTitle}
               </h3>
               <p className="mt-3 text-base  text-brand-charcoal-muted">
-                To provide every client with a premium beauty experience in a
-                clean, relaxing environment — delivering results that exceed
-                expectations every single time.
+                {business.mission}
               </p>
             </motion.div>
             <motion.div
-              initial={{ opacity: 0, y: 24, filter: "blur(12px)" }}
-              whileInView={{ opacity: 1, y: 0, filter: "blur(0px)" }}
-              viewport={{ once: true, amount: 0.2 }}
-              transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1], delay: 0.1 }}
+              {...fadeInUp}
+              viewport={viewportOnce}
+              transition={easeOutExpoDelayed(0.1)}
               className="rounded-xl border border-brand-border bg-white p-8 shadow-sm"
             >
               <div className="flex h-12 w-12 items-center justify-center rounded-full bg-brand-primary-light">
                 <Eye className="h-6 w-6 text-brand-primary" />
               </div>
               <h3 className="mt-4 font-heading text-2xl font-600 text-brand-charcoal">
-                Our Vision
+                {sections.about.visionTitle}
               </h3>
               <p className="mt-3 text-base text-brand-charcoal-muted">
-                To be the most loved and trusted beauty salon in Lahore, known
-                for quality service, hygiene, and a genuinely caring approach to
-                every client who walks through our doors.
+                {business.vision}
               </p>
             </motion.div>
           </div>
@@ -117,29 +114,24 @@ export default function AboutPage() {
       </section>
 
       {/* Meet the Team */}
+      {features.showTeam && (
       <section className="bg-brand-cream py-16 sm:py-24">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <SectionHeading
-            eyebrow="Our Team"
-            title="Meet the Stylists"
-            subtitle="Our skilled team of beauty professionals is here to make you look and feel your best."
+            eyebrow={sections.about.team.eyebrow}
+            title={sections.about.team.title}
+            subtitle={sections.about.team.subtitle}
           />
           <div className="mt-12 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
             {team.map((member, index) => (
               <motion.div
                 key={index}
-                initial={{ opacity: 0, y: 24, filter: "blur(12px)" }}
-                whileInView={{ opacity: 1, y: 0, filter: "blur(0px)" }}
-                viewport={{ once: true, amount: 0.2 }}
-                transition={{
-                  duration: 0.7,
-                  ease: [0.22, 1, 0.36, 1],
-                  delay: index * 0.1,
-                }}
+                {...fadeInUp}
+                viewport={viewportOnce}
+                transition={easeOutExpoDelayed(index * 0.1)}
                 whileHover={{ scale: 1.03 }}
                 className="overflow-hidden rounded-xl border border-brand-border bg-white shadow-sm transition-shadow duration-200 hover:shadow-md"
               >
-                {/* TODO: replace with real NJ Beauty Bliss team photo */}
                 <Image
                   src={member.image}
                   alt={member.name}
@@ -152,17 +144,15 @@ export default function AboutPage() {
                     {member.name}
                   </h3>
                   <p className="mt-1 text-sm text-brand-primary">
-                    {member.specialty}
+                    {member.designation}
                   </p>
                 </div>
               </motion.div>
             ))}
           </div>
-          <p className="mt-8 text-center text-sm text-brand-charcoal-muted">
-            Team details will be updated with real staff photos and names.
-          </p>
         </div>
       </section>
+      )}
 
       <CTASection />
     </>

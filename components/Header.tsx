@@ -5,14 +5,12 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { Menu, X, MessageCircle } from "lucide-react";
 import { AnimatePresence, motion } from "framer-motion";
+import { siteConfig, getVisibleNav, getBookingUrl } from "@/config/site";
 
-const navLinks = [
-  { href: "/", label: "Home" },
-  { href: "/about", label: "About" },
-  { href: "/services", label: "Services" },
-  { href: "/gallery", label: "Gallery" },
-  { href: "/contact", label: "Contact" },
-];
+const navLinks = getVisibleNav();
+const bookingUrl = getBookingUrl();
+const bookingText = siteConfig.booking.buttonText;
+const { sections } = siteConfig;
 
 export default function Header() {
   const [scrolled, setScrolled] = useState(false);
@@ -52,7 +50,7 @@ export default function Header() {
               href="/"
               className="font-heading text-lg font-700 tracking-tight text-brand-charcoal sm:text-xl"
             >
-              NJ Beauty Bliss
+              {siteConfig.business.businessName}
             </Link>
           </motion.div>
 
@@ -72,7 +70,7 @@ export default function Header() {
                       : "text-brand-charcoal after:w-0 hover:after:w-full"
                   }`}
                 >
-                  {link.label}
+                  {link.title}
                 </Link>
               </li>
             ))}
@@ -82,13 +80,13 @@ export default function Header() {
             initial={{ opacity: 0, x: 10 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.35, ease: "easeOut", delay: 0.25 }}
-            href="https://wa.me/923080815888"
+            href={bookingUrl}
             target="_blank"
             rel="noopener noreferrer"
             className="hidden items-center gap-2 rounded-full bg-brand-primary px-4 py-2 text-xs font-600 text-white transition-all duration-200 hover:scale-[1.02] hover:bg-brand-primary-dark focus:outline-none focus:ring-2 focus:ring-brand-primary focus:ring-offset-2 sm:inline-flex"
           >
             <MessageCircle className="h-3.5 w-3.5 fill-white" />
-            Book Now
+            {bookingText}
           </motion.a>
 
           <motion.button
@@ -98,7 +96,7 @@ export default function Header() {
             transition={{ duration: 0.35, ease: "easeOut", delay: 0.2 }}
             className="flex h-9 w-9 items-center justify-center rounded-full text-brand-charcoal transition-colors hover:bg-brand-blush sm:hidden"
             onClick={() => setMobileOpen((open) => !open)}
-            aria-label={mobileOpen ? "Close menu" : "Open menu"}
+            aria-label={mobileOpen ? sections.header.closeMenuAriaLabel : sections.header.openMenuAriaLabel}
             aria-expanded={mobileOpen}
           >
             {mobileOpen ? (
@@ -147,7 +145,7 @@ export default function Header() {
                             : "text-brand-charcoal"
                         }`}
                       >
-                        {link.label}
+                        {link.title}
                       </Link>
                     </motion.li>
                   ))}
@@ -156,7 +154,7 @@ export default function Header() {
                     className="pt-3"
                   >
                     <motion.a
-                      href="https://wa.me/923080815888"
+                      href={bookingUrl}
                       target="_blank"
                       rel="noopener noreferrer"
                       onClick={() => setMobileOpen(false)}
@@ -164,7 +162,7 @@ export default function Header() {
                       className="inline-flex items-center gap-2 rounded-full bg-brand-primary px-5 py-2.5 text-sm font-600 text-white transition-colors hover:bg-brand-primary-dark"
                     >
                       <MessageCircle className="h-4 w-4 fill-white" />
-                      Book Appointment
+                      {bookingText}
                     </motion.a>
                   </motion.li>
                 </ul>

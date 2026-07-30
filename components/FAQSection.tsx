@@ -3,34 +3,11 @@
 import { useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import { ChevronDown } from "lucide-react";
+import { siteConfig, resolveText } from "@/config/site";
+import { fadeInUp, viewportOnce, easeOutExpo, easeOutExpoDelayed } from "@/config/animation";
 
-const faqs = [
-  {
-    question: "Do I need an appointment before visiting?",
-    answer:
-      "Appointments are recommended so we can reserve the right time and stylist for you. Walk-ins are welcomed too.",
-  },
-  {
-    question: "How can I book an appointment?",
-    answer:
-      "The quickest way to book is by WhatsApp. Send us your preferred service, date, and time, and our team will confirm your appointment.",
-  },
-  {
-    question: "Do you offer bridal makeup trials?",
-    answer:
-      "Yes. We recommend a bridal trial so you can discuss your preferred look, test the makeup, and plan every detail before your event.",
-  },
-  {
-    question: "What should I do before a facial or skin treatment?",
-    answer:
-      "Please let our team know about any skin sensitivities, allergies, or products you are currently using. We will recommend the most suitable treatment for you.",
-  },
-  {
-    question: "Are your products and tools hygienic?",
-    answer:
-      "Absolutely. We maintain a clean salon environment and use carefully sanitised tools and quality products for every service.",
-  },
-];
+const faqs = siteConfig.faqs;
+const { sections } = siteConfig;
 
 export default function FAQSection() {
   const [openIndex, setOpenIndex] = useState<number | null>(0);
@@ -39,28 +16,24 @@ export default function FAQSection() {
     <section className="bg-brand-primary py-16 sm:py-24">
       <div className="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8">
         <motion.div
-          initial={{ opacity: 0, y: 24, filter: "blur(12px)" }}
-          whileInView={{ opacity: 1, y: 0, filter: "blur(0px)" }}
-          viewport={{ once: true, amount: 0.2 }}
-          transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
+          {...fadeInUp}
+          viewport={viewportOnce}
+          transition={easeOutExpo}
           className="text-center"
         >
-          <span className="text-sm font-600 uppercase tracking-wider text-white">
-            Need to Know
-          </span>
+          
           <h2 className="mt-2 font-heading text-3xl font-700 text-white sm:text-4xl">
-            Frequently Asked Questions
+            {sections.faq.title}
           </h2>
           <p className="mt-4 text-base text-white">
-            Everything you need to know before your visit to NJ Beauty Bliss.
+            {resolveText(sections.faq.subtitle)}
           </p>
         </motion.div>
 
         <motion.div
-          initial={{ opacity: 0, y: 24, filter: "blur(12px)" }}
-          whileInView={{ opacity: 1, y: 0, filter: "blur(0px)" }}
-          viewport={{ once: true, amount: 0.2 }}
-          transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1], delay: 0.1 }}
+          {...fadeInUp}
+          viewport={viewportOnce}
+          transition={easeOutExpoDelayed(0.1)}
           className="mt-10 space-y-3"
         >
           {faqs.map((faq, index) => {
@@ -108,8 +81,7 @@ export default function FAQSection() {
         </motion.div>
 
         <p className="mt-8 text-center text-sm text-white">
-          Still have questions? Contact us on WhatsApp and our team will be happy
-          to help.
+          {sections.faq.footerText}
         </p>
       </div>
     </section>

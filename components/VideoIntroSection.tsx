@@ -4,6 +4,11 @@ import { useState, useRef } from "react";
 import { motion } from "framer-motion";
 import { Play } from "lucide-react";
 import VideoModal from "@/components/VideoModal";
+import { siteConfig, resolveText } from "@/config/site";
+import { fadeInUp, viewportOnce, easeOutExpo } from "@/config/animation";
+
+const videoSrc = siteConfig.media.video ?? "";
+const { sections } = siteConfig;
 
 export default function VideoIntroSection() {
   const [modalOpen, setModalOpen] = useState(false);
@@ -23,23 +28,21 @@ export default function VideoIntroSection() {
     <section className="bg-brand-cream py-16 sm:py-24">
       <div className="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
         <motion.div
-          initial={{ opacity: 0, y: 24, filter: "blur(12px)" }}
-          whileInView={{ opacity: 1, y: 0, filter: "blur(0px)" }}
-          viewport={{ once: true, amount: 0.2 }}
-          transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
+          {...fadeInUp}
+          viewport={viewportOnce}
+          transition={easeOutExpo}
         >
           {/* Heading */}
           <div className="text-center">
             <span className="text-sm font-600 uppercase tracking-wider text-brand-primary">
-              See Us in Action
+              {sections.videoIntro.eyebrow}
             </span>
             <h2 className="mt-2 font-heading text-3xl font-700 text-brand-charcoal sm:text-4xl">
-              Your Path to{" "}
-              <em className="italic">Effortless</em> Beauty
+              {sections.videoIntro.title}{" "}
+              <em className="italic">{sections.videoIntro.titleHighlight}</em>
             </h2>
             <p className="mx-auto mt-4 max-w-2xl text-lg text-brand-charcoal-muted">
-              Step inside NJ Beauty Bliss and see what makes every visit
-              special.
+              {resolveText(sections.videoIntro.description)}
             </p>
           </div>
 
@@ -49,7 +52,7 @@ export default function VideoIntroSection() {
               ref={playButtonRef}
               onClick={handleOpen}
               onKeyDown={handleKeyDown}
-              aria-label="Play video introduction"
+              aria-label={sections.videoIntro.ariaLabel}
               className="group relative block w-full overflow-hidden rounded-2xl shadow-lg focus:outline-none focus:ring-4 focus:ring-brand-primary/30"
             >
               <video
@@ -59,7 +62,7 @@ export default function VideoIntroSection() {
                 playsInline
                 className="aspect-video w-full object-cover"
               >
-                <source src="/vidssave.com INTRO_ make up & hair _ A cinematic B-roll 1080P.mp4" type="video/mp4" />
+                <source src={videoSrc} type="video/mp4" />
               </video>
 
               {/* Dark overlay for contrast */}
@@ -88,7 +91,7 @@ export default function VideoIntroSection() {
                   </defs>
                   <text className="fill-white text-[9px] uppercase tracking-wider sm:text-[10px]">
                     <textPath href="#circle-path">
-                      PLAY INTRO • PLAY INTRO • PLAY INTRO • PLAY INTRO
+                      {sections.videoIntro.badgeText}
                     </textPath>
                   </text>
                 </svg>
@@ -122,7 +125,7 @@ export default function VideoIntroSection() {
       <VideoModal
         isOpen={modalOpen}
         onClose={handleClose}
-        videoSrc="/vidssave.com INTRO_ make up & hair _ A cinematic B-roll 1080P.mp4"
+        videoSrc={videoSrc}
       />
     </section>
   );

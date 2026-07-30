@@ -1,4 +1,5 @@
 import { MessageCircle } from "lucide-react";
+import { getBookingUrl, siteConfig } from "@/config/site";
 
 type WhatsAppButtonProps = {
   text?: string;
@@ -7,7 +8,7 @@ type WhatsAppButtonProps = {
 };
 
 export default function WhatsAppButton({
-  text = "Book on WhatsApp",
+  text = siteConfig.booking.buttonText,
   variant = "primary",
   className = "",
 }: WhatsAppButtonProps) {
@@ -20,7 +21,7 @@ export default function WhatsAppButton({
 
   return (
     <a
-      href="https://wa.me/923080815888"
+      href={getBookingUrl()}
       target="_blank"
       rel="noopener noreferrer"
       className={`${baseClasses} ${variantClasses} ${className}`}
