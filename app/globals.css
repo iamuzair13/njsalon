@@ -1,24 +1,24 @@
 @import "tailwindcss";
 
 @theme {
-  --color-brand-primary: var(--c-primary);
-  --color-brand-primary-dark: var(--c-secondary);
-  --color-brand-primary-light: var(--c-accent);
-  --color-brand-blush: var(--c-surface);
-  --color-brand-cream: var(--c-background);
-  --color-brand-charcoal: var(--c-text);
-  --color-brand-charcoal-muted: var(--c-muted);
-  --color-brand-border: var(--c-border);
-  --color-whatsapp: var(--c-success);
+  --color-brand-primary: #E4577B;
+  --color-brand-primary-dark: #C93F63;
+  --color-brand-primary-light: #F7C6D3;
+  --color-brand-blush: #FDEEF1;
+  --color-brand-cream: #FFF9F7;
+  --color-brand-charcoal: #262223;
+  --color-brand-charcoal-muted: #6B6062;
+  --color-brand-border: #F0DCE1;
+  --color-whatsapp: #25D366;
   --color-whatsapp-dark: #1ebe5d;
 
-  --font-heading: var(--font-heading-family);
-  --font-body: var(--font-body-family);
+  --font-heading: var(--font-playfair);
+  --font-body: var(--font-inter);
 }
 
 :root {
-  --background: var(--c-background);
-  --foreground: var(--c-text);
+  --background: #FFF9F7;
+  --foreground: #262223;
 }
 
 html {
@@ -28,6 +28,6 @@ html {
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: var(--font-body-family), Arial, Helvetica, sans-serif;
+  font-family: var(--font-body), Arial, Helvetica, sans-serif;
   letter-spacing: -0.02em;
 }
