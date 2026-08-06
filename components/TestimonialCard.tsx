@@ -4,12 +4,7 @@ import { useState, useRef } from "react";
 import Image from "next/image";
 import { motion } from "framer-motion";
 import { Star, ChevronLeft, ChevronRight } from "lucide-react";
-import type { Testimonial } from "@/types/site";
-import { siteConfig } from "@/config/site";
-import { fadeInUp, viewportOnce, easeOutExpo } from "@/config/animation";
-
-const testimonials: Testimonial[] = siteConfig.testimonials;
-const { sections } = siteConfig;
+import { testimonials, type Testimonial } from "@/data/testimonials";
 
 function StarRating({ rating }: { rating: number }) {
   return (
@@ -33,7 +28,7 @@ function TestimonialFigure({ testimonial }: { testimonial: Testimonial }) {
     <figure className="relative flex w-[300px] shrink-0 snap-center flex-col items-center justify-center rounded-2xl border border-brand-border bg-white px-6 py-8 text-center shadow-sm transition-shadow duration-200 hover:shadow-md sm:w-[340px] sm:snap-start">
       {/* Avatar */}
       <Image
-        src={testimonial.image}
+        src={testimonial.avatar}
         alt={testimonial.author}
         width={80}
         height={80}
@@ -51,7 +46,7 @@ function TestimonialFigure({ testimonial }: { testimonial: Testimonial }) {
           &ldquo;
         </span>
         <p className="text-sm leading-relaxed text-brand-charcoal-muted">
-          {testimonial.review}
+          {testimonial.quote}
         </p>
         <span className="pointer-events-none absolute -bottom-10 -right-[-20px] font-heading text-5xl leading-none text-brand-primary/20 sm:text-6xl">
           &rdquo;
@@ -94,22 +89,24 @@ export default function TestimonialCard() {
 
   return (
     <motion.div
-      {...fadeInUp}
-      viewport={viewportOnce}
-      transition={easeOutExpo}
+      initial={{ opacity: 0, y: 24, filter: "blur(12px)" }}
+      whileInView={{ opacity: 1, y: 0, filter: "blur(0px)" }}
+      viewport={{ once: true, amount: 0.2 }}
+      transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
     >
       <div className="mx-auto max-w-6xl">
         {/* Header row */}
         <div className="mb-10 text-start md:mb-14 md:text-center ">
           <div className="text-center">
             <span className="text-sm font-600 uppercase tracking-wider text-brand-primary">
-              {sections.testimonials.eyebrow}
+              Client Love
             </span>
             <h2 className="mt-2 font-heading text-3xl font-700 text-brand-charcoal sm:text-4xl">
-              {sections.testimonials.title}
+              What Our Happy Clients Say
             </h2>
             <p className="mt-4  text-base leading-relaxed text-brand-charcoal-muted mx-auto md:mx-0">
-              {sections.testimonials.subtitle}
+              See what our happy clients have to say. They&apos;ve shared how
+              our services helped them look and feel their best.
             </p>
           </div>
         </div>
@@ -119,7 +116,7 @@ export default function TestimonialCard() {
           {/* Left button */}
           <button
             type="button"
-            aria-label={sections.testimonials.prevAriaLabel}
+            aria-label="Previous slide"
             onClick={() => scroll("prev")}
             disabled={!canScrollPrev}
             className={`absolute -left-2 z-10 flex h-11 w-11 shrink-0 items-center justify-center rounded-full border shadow-md transition-all duration-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-brand-primary disabled:cursor-default disabled:opacity-40 sm:-left-6 ${
@@ -147,7 +144,7 @@ export default function TestimonialCard() {
           {/* Right button */}
           <button
             type="button"
-            aria-label={sections.testimonials.nextAriaLabel}
+            aria-label="Next slide"
             onClick={() => scroll("next")}
             disabled={!canScrollNext}
             className={`absolute -right-2 z-10 flex h-11 w-11 shrink-0 items-center justify-center rounded-full border shadow-md transition-all duration-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-brand-primary disabled:cursor-default disabled:opacity-40 sm:-right-6 ${

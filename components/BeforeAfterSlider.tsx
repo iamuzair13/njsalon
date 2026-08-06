@@ -4,9 +4,6 @@ import { useState, useRef, useCallback } from "react";
 import Image from "next/image";
 import { motion } from "framer-motion";
 import { MoveHorizontal } from "lucide-react";
-import { siteConfig } from "@/config/site";
-
-const { sections } = siteConfig;
 
 export type BeforeAfterItem = {
   beforeSrc: string;
@@ -98,7 +95,7 @@ export default function BeforeAfterSlider({ item }: BeforeAfterSliderProps) {
           sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 600px"
         />
         <span className="absolute bottom-3 right-3 rounded-full bg-brand-charcoal/70 px-3 py-1 text-xs font-600 uppercase tracking-wider text-white backdrop-blur-sm">
-          {sections.beforeAfter.afterLabel}
+          After
         </span>
       </div>
 
@@ -115,7 +112,7 @@ export default function BeforeAfterSlider({ item }: BeforeAfterSliderProps) {
           sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 600px"
         />
         <span className="absolute bottom-3 left-3 rounded-full bg-brand-charcoal/70 px-3 py-1 text-xs font-600 uppercase tracking-wider text-white backdrop-blur-sm">
-          {sections.beforeAfter.beforeLabel}
+          Before
         </span>
       </div>
 

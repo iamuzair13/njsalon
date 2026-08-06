@@ -4,9 +4,6 @@ import { useState } from "react";
 import Image from "next/image";
 import { motion, AnimatePresence } from "framer-motion";
 import { X } from "lucide-react";
-import { siteConfig } from "@/config/site";
-
-const { sections } = siteConfig;
 
 export type GalleryImage = {
   src: string;
@@ -99,7 +96,7 @@ export default function GalleryGrid({ images, categories }: GalleryGridProps) {
                 e.stopPropagation();
                 setLightboxIndex(null);
               }}
-              aria-label={sections.gallery.closeAriaLabel}
+              aria-label="Close"
             >
               <X className="h-8 w-8" />
             </button>
@@ -109,7 +106,7 @@ export default function GalleryGrid({ images, categories }: GalleryGridProps) {
                 e.stopPropagation();
                 handlePrev();
               }}
-              aria-label={sections.gallery.prevAriaLabel}
+              aria-label="Previous"
             >
               &#8249;
             </button>
@@ -119,7 +116,7 @@ export default function GalleryGrid({ images, categories }: GalleryGridProps) {
                 e.stopPropagation();
                 handleNext();
               }}
-              aria-label={sections.gallery.nextAriaLabel}
+              aria-label="Next"
             >
               &#8250;
             </button>

@@ -3,9 +3,6 @@
 import { useRef, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { X } from "lucide-react";
-import { siteConfig } from "@/config/site";
-
-const { sections } = siteConfig;
 
 type VideoModalProps = {
   isOpen: boolean;
@@ -79,7 +76,7 @@ export default function VideoModal({
           <button
             ref={closeButtonRef}
             onClick={onClose}
-            aria-label={sections.videoModal.closeAriaLabel}
+            aria-label="Close video"
             className="absolute right-4 top-4 flex h-11 w-11 items-center justify-center rounded-full bg-white/10 text-white transition-colors hover:bg-white/20 focus:outline-none focus:ring-2 focus:ring-white/50 sm:right-6 sm:top-6"
           >
             <X className="h-6 w-6" />

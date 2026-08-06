@@ -3,9 +3,6 @@
 import { motion } from "framer-motion";
 import type { LucideIcon } from "lucide-react";
 import Image from "next/image";
-import { siteConfig } from "@/config/site";
-
-const { sections } = siteConfig;
 
 type ServiceCardProps = {
   icon: LucideIcon;
@@ -24,44 +21,60 @@ export default function ServiceCard({
 }: ServiceCardProps) {
   return (
     <motion.div
-      whileHover={{ scale: 1.03 }}
-      transition={{ duration: 0.2 }}
-      className="group rounded-[1.75rem] border border-brand-border bg-white p-6 shadow-sm transition-all duration-300 hover:shadow-md"
+      initial={{ opacity: 0, y: 20 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true }}
+      whileHover={{ y: -6 }}
+      transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
+      className="group relative flex flex-col overflow-hidden rounded-3xl border border-brand-border bg-white shadow-sm transition-shadow duration-500 hover:shadow-xl"
     >
-      <div className="relative h-20 w-20 overflow-hidden rounded-[50%] border-2 border-brand-border transition-all duration-500 ease-in-out group-hover:h-40 group-hover:w-full group-hover:rounded-2xl">
+      {/* Image Area — Fixed aspect ratio, clean zoom effect */}
+      <div className="relative h-44 w-full overflow-hidden bg-brand-blush">
         {image ? (
-          <Image
-            src={image}
-            alt={title}
-            fill
-            className="object-cover"
-            sizes="(max-width: 768px) 100vw, 25vw"
-          />
+          <>
+            <Image
+              src={image}
+              alt={title}
+              fill
+              className="object-cover transition-transform duration-700 ease-out group-hover:scale-105"
+              sizes="(max-width: 768px) 100vw, 25vw"
+            />
+            {/* Subtle overlay darkens slightly on hover for depth */}
+            <div className="absolute inset-0 bg-brand-charcoal/0 transition-colors duration-500 group-hover:bg-brand-charcoal/10" />
+          </>
         ) : (
-          <div className="flex h-full w-full items-center justify-center bg-brand-blush transition-colors duration-300">
-            <Icon className="h-8 w-8 text-brand-primary transition-all duration-300 group-hover:h-10 group-hover:w-10" />
+          <div className="flex h-full w-full items-center justify-center transition-transform duration-700 ease-out group-hover:scale-105">
+            <Icon className="h-10 w-10 text-brand-primary/40" />
           </div>
         )}
       </div>
 
-      <div className="mt-5 flex items-center gap-3">
-        <div className="flex h-10 w-10 shrink-0 items-center border border-brand-primary/20 justify-center rounded-full bg-white">
-          <Icon className="h-5 w-5 text-brand-primary" />
+      {/* Content Area */}
+      <div className="flex flex-1 flex-col p-6">
+        <div className="flex items-center gap-3">
+          <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl border border-brand-primary/10 bg-brand-primary/5 transition-colors duration-300 group-hover:border-brand-primary/20 group-hover:bg-brand-primary/10">
+            <Icon className="h-5 w-5 text-brand-primary transition-transform duration-500 group-hover:scale-110" />
+          </div>
+          <h3 className="font-heading text-lg font-semibold text-brand-charcoal">
+            {title}
+          </h3>
         </div>
-        <h3 className="font-heading text-xl font-600 text-brand-charcoal">
-          {title}
-        </h3>
+
+        <p className="mt-3 text-sm leading-relaxed text-brand-charcoal-muted">
+          {description}
+        </p>
+
+        {startingPrice && (
+          <div className="mt-4 pt-4 border-t border-brand-border/50">
+            <p className="text-sm font-semibold text-brand-primary">
+              Starting from {startingPrice}
+            </p>
+          </div>
+        )}
       </div>
 
-      <p className="mt-2 text-sm leading-relaxed text-brand-charcoal-muted">
-        {description}
-      </p>
-
-      {startingPrice && (
-        <p className="mt-3 text-sm font-600 text-brand-primary">
-          {sections.serviceCard.startingFromText} {startingPrice}
-        </p>
-      )}
+      {/* Bottom accent line — animates width on hover */}
+      <div className="absolute bottom-0 left-0 h-[2px] w-0 bg-brand-primary transition-all duration-500 ease-out group-hover:w-full" />
     </motion.div>
   );
 }
